@@ -93,7 +93,7 @@ if (TARGET === 'build') {
             new BrowserSyncPlugin({
                 host: process.env.IP || 'localhost',
                 port: process.env.PORT || 3001,
-                server: {baseDir: ['./']},
+                server: {baseDir: ['./dist']},
             })
         ]
     });

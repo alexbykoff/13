@@ -6,9 +6,8 @@ game.level = buildLevel(rndInt(14, 24), rndInt(12, 18));
 game.playerPosition = {row: 1, column: 1};
 positionPlayer(1, 1, game);
 populateLevel(game.level);
-document.onkeyup = keyboardHandler;
 
-function keyboardHandler(e) {
+document.onkeyup = e => {
     let row = 0, column = 0;
     switch (e.which) {
         case 37:
@@ -27,4 +26,6 @@ function keyboardHandler(e) {
             break;
     }
     positionPlayer(game.playerPosition.row + row, game.playerPosition.column + column, game);
-}
+};
+
+

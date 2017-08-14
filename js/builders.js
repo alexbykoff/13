@@ -1,3 +1,5 @@
+import {rndInt} from "./helpers";
+
 export function buildLevel(width, height) {
     const levelWrapper = document.querySelector(".level-wrapper");
     levelWrapper.style.width = width * 32 + "px";
@@ -13,6 +15,24 @@ export function buildLevel(width, height) {
         }
     }
     return {width, height}
+}
 
+export function populateLevel(level) {
+    let itemNumber = Math.floor(level.width * level.height / 20);
+    while (itemNumber--) {
+        makeThing(level);
+    }
+}
+
+function makeThing(level) {
+    const x = rndInt(2, level.width - 2);
+    const y = rndInt(2, level.height - 2);
+    console.log(`trying ${x} ${y} of ${level.width} ${level.height}`);
+    const cell = document.querySelector(`#cell-${x}-${y}`);
+    if ([...cell.classList].indexOf("free") === -1) {
+        makeThing(level);
+    } else {
+        cell.classList.add("item");
+    }
 
 }

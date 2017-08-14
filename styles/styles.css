@@ -25,3 +25,7 @@ body {
 .player {
     background-image: url("../images/player.png");
 }
+
+.item {
+    background-color: red;
+}

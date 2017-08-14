@@ -1,8 +1,6 @@
-export function rndInt(min, max) {
-    return Math.floor(Math.random() * (max - min) + min);
-}
+export const rndInt = (min, max) => Math.floor(Math.random() * (max - min) + min);
 
-export function positionPlayer(x, y) {
+export const positionPlayer = (x, y) => {
     const newPosition = document.querySelector(`#cell-${x}-${y}`);
     if ([...newPosition.classList].indexOf("free") >= 0) {
         newPosition.classList.remove("free");

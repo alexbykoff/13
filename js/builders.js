@@ -19,17 +19,13 @@ export function buildLevel(width, height) {
 
 export function populateLevel(level) {
     let itemNumber = Math.floor(level.width * level.height / 30);
-    while (itemNumber--) {
-        makeThing(level);
-    }
+    while (itemNumber--) makeThing(level);
 }
 
 function makeThing(level) {
     const row = rndInt(2, level.height - 3);
     const column = rndInt(2, level.width - 3);
     const cell = document.querySelector(`#cell-${row}-${column}`);
-    if ([...cell.classList].indexOf("free") === -1) {
-        makeThing(level);
-    }
+    if ([...cell.classList].indexOf("free") === -1) makeThing(level);
     cell.classList.add("item");
 }

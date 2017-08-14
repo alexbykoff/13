@@ -1,0 +1,29 @@
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #555;
+}
+
+.level-wrapper {
+    width: 672px;
+    height: 672px;
+    margin: 1rem auto;
+    line-height: 0;
+}
+
+.level-room {
+    display: inline-block;
+    width: 224px;
+    height: 224px;
+    background-color: #555;
+}
+
+.level-cell {
+    display: inline-block;
+    width: 32px;
+    height: 32px;
+}
+
+.cell-wall {
+    background: #444 url("../images/brickwall.png");
+}

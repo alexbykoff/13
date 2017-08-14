@@ -1,1 +1,3 @@
-console.log("hi");
+import {buildLevel} from "./builders";
+
+buildLevel();

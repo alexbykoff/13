@@ -9,20 +9,22 @@ populateLevel(game.level);
 document.onkeyup = keyboardHandler;
 
 function keyboardHandler(e) {
+    let row = 0, column = 0;
     switch (e.which) {
         case 37:
-            positionPlayer(game.playerPosition.row, game.playerPosition.column - 1, game);
+            column = -1;
             break;
         case 39:
-            positionPlayer(game.playerPosition.row, game.playerPosition.column + 1, game);
+            column = 1;
             break;
         case 40:
-            positionPlayer(game.playerPosition.row + 1, game.playerPosition.column, game);
+            row = 1;
             break;
         case 38:
-            positionPlayer(game.playerPosition.row - 1, game.playerPosition.column, game);
+            row = -1;
             break;
         default:
             break;
     }
+    positionPlayer(game.playerPosition.row + row, game.playerPosition.column + column, game);
 }

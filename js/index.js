@@ -1,4 +1,5 @@
 import {buildLevel} from "./builders";
-import {rndInt} from "./helpers";
+import {rndInt, positionPlayer} from "./helpers";
 
-buildLevel(rndInt(18, 28), rndInt(14, 22));
+const level = buildLevel(rndInt(14, 24), rndInt(12, 18));
+positionPlayer(1,1);

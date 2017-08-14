@@ -18,21 +18,18 @@ export function buildLevel(width, height) {
 }
 
 export function populateLevel(level) {
-    let itemNumber = Math.floor(level.width * level.height / 20);
+    let itemNumber = Math.floor(level.width * level.height / 30);
     while (itemNumber--) {
         makeThing(level);
     }
 }
 
 function makeThing(level) {
-    const x = rndInt(2, level.width - 2);
-    const y = rndInt(2, level.height - 2);
-    console.log(`trying ${x} ${y} of ${level.width} ${level.height}`);
-    const cell = document.querySelector(`#cell-${x}-${y}`);
+    const row = rndInt(2, level.height - 3);
+    const column = rndInt(2, level.width - 3);
+    const cell = document.querySelector(`#cell-${row}-${column}`);
     if ([...cell.classList].indexOf("free") === -1) {
         makeThing(level);
-    } else {
-        cell.classList.add("item");
     }
-
+    cell.classList.add("item");
 }

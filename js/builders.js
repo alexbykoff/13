@@ -10,6 +10,7 @@ export function buildLevel(width, height) {
             cell.id = `cell-${i}-${j}`;
             if (i === 0 || i === height - 1 || j === 0 || j === width - 1) {
                 cell.classList.add("cell-wall");
+                cell.classList.remove("free");
             }
             levelWrapper.appendChild(cell);
         }

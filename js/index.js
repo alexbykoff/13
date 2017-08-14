@@ -22,5 +22,7 @@ function keyboardHandler(e) {
         case 38:
             positionPlayer(game.playerPosition.row - 1, game.playerPosition.column, game);
             break;
+        default:
+            break;
     }
 }

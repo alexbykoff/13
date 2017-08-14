@@ -2,6 +2,7 @@ body {
     margin: 0;
     padding: 0;
     background-color: #555;
+    font-family: "Courier New", Courier, monospace;
 }
 
 .level-wrapper {
@@ -22,6 +23,13 @@ body {
     display: inline-block;
     width: 32px;
     height: 32px;
+    line-height: 2rem;
+    text-align: center;
+}
+
+.level-cell.cell-wall {
+    color: blue;
+    font-weight: bolder;
 }
 
 .cell-wall {

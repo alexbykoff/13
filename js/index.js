@@ -1,6 +1,5 @@
 import {buildLevel, populateLevel} from "./builders";
-import {rndInt, positionPlayer} from "./helpers";
-import "./jsfxr.min";
+import {rndInt, positionPlayer, generateName} from "./helpers";
 import fx, {play} from "./sounds";
 
 const game = {};

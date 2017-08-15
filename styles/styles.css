@@ -9,7 +9,7 @@ body, html {
 }
 
 .level-wrapper {
-    margin: 1rem auto 1rem;
+    margin: 0 1rem;
     line-height: 0;
     background-image: url("../images/floor.png");
 }
@@ -37,7 +37,24 @@ body, html {
 .title {
     margin-top: 2rem;
     font-size: 2.75rem;
-    color: #fff;
+    color: #aaa;
     font-weight: lighter;
     text-align: center;
+}
+
+.flex-holder {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+}
+
+.right-menu {
+    display: flex;
+    flex-direction: column;
+    border: 5px solid #aaa;
+    box-sizing: border-box;
+    color: #fff;
+    padding: 1rem;
+    justify-content: flex-start;
+    align-content: center;
 }

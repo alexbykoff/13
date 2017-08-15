@@ -6,7 +6,7 @@ body {
 }
 
 .level-wrapper {
-    margin: 3rem auto 1rem;
+    margin: 1rem auto 1rem;
     line-height: 0;
 }
 
@@ -28,4 +28,13 @@ body {
 
 .item {
     background-image: url("../images/chest.png");
+}
+
+.title {
+    margin-top: 2rem;
+    font-size: 3rem;
+    color: #aaa;
+    font-weight: lighter;
+    text-align: center;
+    text-shadow: 2px 2px 0px rgba(255, 69, 62, 1);
 }

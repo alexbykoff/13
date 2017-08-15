@@ -1,3 +1,4 @@
+import "./jsfxr.min";
 const audio = new Audio();
 
 export function play(s) {

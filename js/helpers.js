@@ -18,8 +18,8 @@ const con = "BCDFGHJKLMNPRSTVWX".split("");
 export const generateName = words => {
     let word = "";
     while (words--) {
-        for (let i = 0; i < Math.floor(Math.random() * 6 + 3); i++) {
-            word += i % 2 ? vow[Math.floor(Math.random() * vow.length)] : con[Math.floor(Math.random() * con.length)];
+        for (let i = 0; i < rndInt(4, 7); i++) {
+            word += i % 2 ? vow[rndInt(0, vow.length)] : con[rndInt(0, con.length)];
         }
         words && (word += " ");
     }

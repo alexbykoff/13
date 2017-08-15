@@ -1,11 +1,14 @@
 import {buildLevel, populateLevel} from "./builders";
 import {rndInt, positionPlayer} from "./helpers";
+import "./jsfxr.min";
+import fx, {play} from "./sounds";
 
 const game = {};
-game.level = buildLevel(rndInt(14, 24), rndInt(12, 18));
+game.level = buildLevel(rndInt(18, 24), rndInt(12, 18));
 game.playerPosition = {row: 1, column: 1};
 positionPlayer(1, 1, game);
 populateLevel(game.level);
+play(fx.introSound);
 
 document.onkeyup = e => {
     let row = 0, column = 0;

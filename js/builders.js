@@ -6,11 +6,11 @@ export function buildLevel(width, height) {
     for (let i = 0; i < height; i++) {
         for (let j = 0; j < width; j++) {
             const cell = document.createElement("div");
-            cell.classList.add("level-cell", "free");
             cell.id = `cell-${i}-${j}`;
-            if (i === 0 || i === height - 1 || j === 0 || j === width - 1) {
-                cell.classList.add("cell-wall");
-                cell.classList.remove("free");
+            if (!i || i === height - 1 || !j || j === width - 1) {
+                cell.classList.add("cell-wall", "level-cell");
+            } else {
+                cell.classList.add("free", "level-cell");
             }
             levelWrapper.appendChild(cell);
         }
@@ -29,4 +29,5 @@ function makeThing(level) {
     const cell = document.querySelector(`#cell-${row}-${column}`);
     if ([...cell.classList].indexOf("free") === -1) makeThing(level);
     cell.classList.add("item");
+    cell.classList.remove("free");
 }

@@ -5,7 +5,11 @@ export const updateNeighbors = (row, column) => {
     { x: row - 1, y: column },
     { x: row, y: column + 1 },
     { x: row + 1, y: column },
-    { x: row, y: column - 1 }
+    { x: row, y: column - 1 },
+    { x: row - 1, y: column - 1 },
+    { x: row + 1, y: column + 1 },
+    { x: row - 1, y: column + 1 },
+    { x: row + 1, y: column - 1 },
   ];
 
   neighbors.forEach(cell => {

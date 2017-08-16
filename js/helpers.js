@@ -1,8 +1,24 @@
 export const rndInt = (min, max) => Math.floor(Math.random() * (max - min) + min);
 
+export const updateNeighbors = (row, column) => {
+  const neighbors = [
+    { x: row - 1, y: column },
+    { x: row, y: column + 1 },
+    { x: row + 1, y: column },
+    { x: row, y: column - 1 }
+  ];
+
+  neighbors.forEach(cell => {
+    const div = document.querySelector(`#cell-${cell.x}-${cell.y}`);
+    div.classList.remove("fade");
+  });
+}
+
 export const positionPlayer = (row, column, game) => {
     const newPosition = document.querySelector(`#cell-${row}-${column}`);
     const oldPosition = document.querySelector(`#cell-${game.playerPosition.row || 1}-${game.playerPosition.column || 1}`);
+    updateNeighbors(row, column);
+
     if ([...newPosition.classList].indexOf("free") >= 0) {
         oldPosition.classList.remove("player", "fade");
         oldPosition.classList.add("free");

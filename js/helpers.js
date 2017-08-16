@@ -10,14 +10,13 @@ export const updateNeighbors = (row, column) => {
 
   neighbors.forEach(cell => {
     const div = document.querySelector(`#cell-${cell.x}-${cell.y}`);
-    div.classList.remove("fade");
+    if (div) div.classList.remove("fade");
   });
 }
 
 export const positionPlayer = (row, column, game) => {
     const newPosition = document.querySelector(`#cell-${row}-${column}`);
     const oldPosition = document.querySelector(`#cell-${game.playerPosition.row || 1}-${game.playerPosition.column || 1}`);
-    updateNeighbors(row, column);
 
     if ([...newPosition.classList].indexOf("free") >= 0) {
         oldPosition.classList.remove("player", "fade");
@@ -25,6 +24,7 @@ export const positionPlayer = (row, column, game) => {
         newPosition.classList.remove("free", "fade");
         newPosition.classList.add("player");
         game.playerPosition = Object.assign(game.playerPosition, {row, column});
+        updateNeighbors(row, column);
     }
 };
 

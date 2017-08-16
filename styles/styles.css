@@ -46,6 +46,10 @@ body, html {
     background: url("../images/chest.png");
 }
 
+.item.fade {
+    background: none;
+}
+
 .title {
     margin-top: 2rem;
     font-size: 2.75rem;

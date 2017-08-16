@@ -10,7 +10,7 @@ export function buildLevel(width, height) {
             if (!i || i === height - 1 || !j || j === width - 1) {
                 cell.classList.add("cell-wall", "level-cell");
             } else {
-                cell.classList.add("free", "level-cell");
+                cell.classList.add("free", "level-cell", "fade");
             }
             levelWrapper.appendChild(cell);
         }

@@ -24,6 +24,20 @@ body, html {
     background: url("../images/brickwall.png");
 }
 
+.level-cell.fade {
+    position: relative;
+}
+
+.level-cell.fade::before {
+    position: absolute;
+    content: '';
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+}
+
 .player {
     background: url("../images/player.png");
 }

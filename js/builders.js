@@ -1,7 +1,7 @@
-import {rndInt} from "./helpers";
+import {rndInt, getNearCells, $} from "./helpers";
 
 export function buildLevel(width, height) {
-    const levelWrapper = document.querySelector(".level-wrapper");
+    const levelWrapper = $(".level-wrapper");
     levelWrapper.style.width = width * 32 + "px";
     for (let i = 0; i < height; i++) {
         for (let j = 0; j < width; j++) {
@@ -26,7 +26,7 @@ export function populateLevel(level) {
 function makeThing(level) {
     const row = rndInt(2, level.height - 3);
     const column = rndInt(2, level.width - 3);
-    const cell = document.querySelector(`#cell-${row}-${column}`);
+    const cell = $(`#cell-${row}-${column}`);
     if ([...cell.classList].indexOf("free") === -1) makeThing(level);
     cell.classList.add("item");
     cell.classList.remove("free");

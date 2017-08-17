@@ -1,5 +1,5 @@
 import {buildLevel, populateLevel} from "./builders";
-import {rndInt, positionPlayer, generateName} from "./helpers";
+import {rndInt, positionPlayer} from "./helpers";
 import fx, {play} from "./sounds";
 
 const game = {};

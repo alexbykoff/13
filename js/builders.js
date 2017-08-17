@@ -1,4 +1,4 @@
-import {rndInt, getNearCells, $} from "./helpers";
+import {rndInt, areaIsClear, $} from "./helpers";
 
 export function buildLevel(width, height) {
     const levelWrapper = $(".level-wrapper");
@@ -18,16 +18,21 @@ export function buildLevel(width, height) {
     return {width, height}
 }
 
-export function populateLevel(level) {
-    let itemNumber = Math.floor(level.width * level.height / 30);
-    while (itemNumber--) makeThing(level);
-}
 
-function makeThing(level) {
-    const row = rndInt(2, level.height - 3);
-    const column = rndInt(2, level.width - 3);
-    const cell = $(`#cell-${row}-${column}`);
-    if ([...cell.classList].indexOf("free") === -1) makeThing(level);
-    cell.classList.add("item");
-    cell.classList.remove("free");
+export function populateLevel(level) {
+
+    /*place random objects while keeping the distance of 1 cell at least*/
+
+    let itemNumber = Math.floor(level.width * level.height / 20);
+    while (itemNumber) {
+        const row = rndInt(2, level.height - 2);
+        const column = rndInt(2, level.width - 2);
+        if (areaIsClear(row, column)) {
+            const cell = $(`#cell-${row}-${column}`);
+            cell.classList.add("item");
+            cell.classList.remove("free");
+            itemNumber--;
+        }
+    }
+
 }

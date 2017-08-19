@@ -3,21 +3,6 @@ import {rndInt, areaIsClear, $} from "./helpers";
 const rooms = [];
 
 export function buildWrapper() {
-    /*    const levelWrapper = $(".level-wrapper");
-        levelWrapper.style.width = width * 32 + "px";
-        for (let i = 0; i < height; i++) {
-            for (let j = 0; j < width; j++) {
-                const cell = document.createElement("div");
-                cell.id = `cell-${i}-${j}`;
-                if (!i || i === height - 1 || !j || j === width - 1) {
-                    cell.classList.add("cell-wall", "level-cell");
-                } else {
-                    cell.classList.add("free", "level-cell", "fade");
-                }
-                levelWrapper.appendChild(cell);
-            }
-        }
-        return {width, height}*/
     const holder = document.querySelector(".holder");
 
     for (let i = 0; i < 400; i++) {

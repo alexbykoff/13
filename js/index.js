@@ -1,12 +1,13 @@
-import {buildLevel, populateLevel} from "./builders";
+import {buildWrapper, createNewRandomLevel, populateLevel} from "./builders";
 import {rndInt, positionPlayer} from "./helpers";
 import fx, {play} from "./sounds";
 
 const game = {};
-game.level = buildLevel(rndInt(18, 24), rndInt(12, 18));
-game.playerPosition = {row: 1, column: 1};
-positionPlayer(1, 1, game);
-populateLevel(game.level);
+game.level = buildWrapper();
+createNewRandomLevel(140, game);
+game.playerPosition = positionPlayer();
+//positionPlayer(game.playerPosition.row,, game);
+// populateLevel(game.level);
 play(fx.introSound);
 
 document.onkeyup = e => {

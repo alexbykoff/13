@@ -2,23 +2,13 @@ body, html {
     margin: 0;
     padding: 0;
     background-color: #222;
-    font-family: "Courier New", Courier, monospace;
+    font-family: "Arial Black", Arial;
     width: 100%;
     height: 100%;
     overflow-y: hidden;
 }
 
-.level-wrapper {
-    margin: 0 1rem;
-    line-height: 0;
-    background: url("../images/floor.png");
-}
 
-.level-cell {
-    display: inline-block;
-    width: 32px;
-    height: 32px;
-}
 
 .cell-wall {
     background: url("../images/brickwall.png");
@@ -72,4 +62,39 @@ body, html {
     padding: 1rem;
     justify-content: flex-start;
     align-content: center;
+}
+
+.holder {
+    width: 640px;
+    height: 640px;
+    box-sizing: border-box;
+    line-height: 0;
+}
+
+.cell {
+    display: inline-block;
+    width: 32px;
+    height: 32px;
+    line-height: 1rem;
+    font-size: .5rem;
+    background: #555 url("../images/brickwall.png");
+}
+
+.free {
+    background-color: #fff;
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAbUlEQVRYR2NsbGz8zzCAgDEoIADFAfqGhgwXz5/H6SRqy486gHHA0wDIAfSMc/TEBQ6BUQcMYDHAMJoNBz4ERsuB0XJgwNPAaHtgwENgwNPAaDYcFCEw2h5ADgFqdzzQQxfd/NH2wGizfMBDAAC2JWLYgNuMAwAAAABJRU5ErkJggg==);
+}
+
+.tunnel {
+    background-color: red;
+}
+
+.start {
+    background-image: none;
+    background-color: cyan;
+}
+
+.finish {
+    background-image: none;
+    background-color: firebrick;
 }

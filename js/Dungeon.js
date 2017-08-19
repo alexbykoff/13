@@ -97,27 +97,25 @@ export default class Dungeon {
         }
     };
 
-    populateRoom() {
-        let itemNumber = Math.floor(this.cells / 20);
-        while (itemNumber) {
-            const row = rndInt(2, level.height - 2);
-            const column = rndInt(2, level.width - 2);
-            if (areaIsClear(row, column)) {
-                const cell = $(`#cell-${row}-${column}`);
-                cell.classList.add("item");
-                cell.classList.remove("free");
-                itemNumber--;
-            }
-        }
-    }
+    // populateRoom() {
+    //     let itemNumber = Math.floor(this.cells / 20);
+    //     while (itemNumber) {
+    //         const row = rndInt(2, this.side - 2);
+    //         const column = rndInt(2, this.side - 2);
+    //         if (areaIsClear(x, y)) {
+    //             const cell = $(`#c${x}-${y}`);
+    //             cell.classList.add("item");
+    //             cell.classList.remove("free");
+    //             itemNumber--;
+    //         }
+    //     }
+    // }
 
     movePlayerTo(x, y) {
-        console.log(x, y);
         const newPosition = $(`#c${x}-${y}`);
         const oldPosition = $(`#c${this.player.x}-${this.player.y}`);
 
         if ([...newPosition.classList].indexOf("free") >= 0) {
-
             oldPosition.classList.remove("player", "fade");
             oldPosition.classList.add("free");
             newPosition.classList.remove("free", "fade");

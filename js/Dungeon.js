@@ -1,4 +1,4 @@
-import {$, rndInt, areaIsClear} from './helpers';
+import {$, rndInt, areaIsClear, updateNeighbours} from './helpers';
 
 export default class Dungeon {
     constructor(side) {
@@ -30,7 +30,7 @@ export default class Dungeon {
             for (let x = 0; x < 20; x++) {
                 for (let y = 0; y < 20; y++) {
                     if ([...$(`#c${x}-${y}`).classList].indexOf('free') >= 0) {
-                        $(`#c${x}-${y}`).classList.add("start");
+                        $(`#c${x}-${y}`).className = ("cell player");
                         this.player.x = x;
                         this.player.y = y;
                         break start;
@@ -55,6 +55,7 @@ export default class Dungeon {
         }
 
         this.cells = cells;
+        this.movePlayerTo(this.player.x, this.player.y);
     };
 
     generateChunks() {
@@ -70,7 +71,7 @@ export default class Dungeon {
 
         for (let i = y; i < y + h; i++) {
             for (let j = x; j < x + w; j++) {
-               $(`#c${j}-${i}`).classList.add("free");
+                $(`#c${j}-${i}`).classList.add("free");
             }
         }
 
@@ -92,7 +93,7 @@ export default class Dungeon {
         let newy1 = Math.min(y1, y2);
         let newy2 = Math.max(y1, y2);
         for (let y = newy1; y <= newy2; y++) {
-           $(`#c${x}-${y}`).classList.add("free")
+            $(`#c${x}-${y}`).classList.add("free")
         }
     };
 
@@ -110,17 +111,25 @@ export default class Dungeon {
         }
     }
 
-    positionPlayer(x,y){
+    movePlayerTo(x, y) {
+        console.log(x, y);
         const newPosition = $(`#c${x}-${y}`);
         const oldPosition = $(`#c${this.player.x}-${this.player.y}`);
 
         if ([...newPosition.classList].indexOf("free") >= 0) {
+
             oldPosition.classList.remove("player", "fade");
             oldPosition.classList.add("free");
             newPosition.classList.remove("free", "fade");
             newPosition.classList.add("player");
-            updateNeighbours(row, column);
+            updateNeighbours(x, y);
+            this.updatePlayerPosition(x, y);
         }
+    }
+
+    updatePlayerPosition(x, y) {
+        this.player.x = x;
+        this.player.y = y;
     }
 
 }

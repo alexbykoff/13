@@ -2,26 +2,10 @@ body, html {
     margin: 0;
     padding: 0;
     background-color: #222;
-    font-family: "Courier New", Courier, monospace;
+    font-family: Palatino, "Palatino Linotype", "Palatino LT STD", "Book Antiqua", Georgia, serif;
     width: 100%;
     height: 100%;
     overflow-y: hidden;
-}
-
-.level-wrapper {
-    margin: 0 1rem;
-    line-height: 0;
-    background: url("../images/floor.png");
-}
-
-.level-cell {
-    display: inline-block;
-    width: 32px;
-    height: 32px;
-}
-
-.cell-wall {
-    background: url("../images/brickwall.png");
 }
 
 .level-cell.fade {
@@ -38,38 +22,82 @@ body, html {
     background: rgba(0, 0, 0, 0.5);
 }
 
-.player {
-    background: url("../images/player.png");
-}
 
-.item {
-    background: url("../images/chest.png");
-}
 
 .item.fade {
     background: none;
 }
 
 .title {
-    margin-top: 2rem;
-    font-size: 2.75rem;
+    margin-top: 8rem;
+    font-size: 8rem;
     color: #aaa;
-    font-weight: lighter;
+    text-align: center;
+    transform: scale(.75, 1.5);
+    text-shadow: 2px 2px 1px #fff;
+}
+
+.holder {
+    margin: 1rem auto;
+    width: 640px;
+    height: 640px;
+    box-sizing: border-box;
+    line-height: 0;
+}
+
+.select-menu {
+    display: flex;
+    padding: 0;
+    justify-content: center;
+    align-content: center;
+}
+
+.select-menu__item{
+    padding: 1rem;
+    font-size: 1.75rem;
     text-align: center;
 }
 
-.flex-holder {
-    display: flex;
-    justify-content: center;
+.select-menu__item p {
+    color: #aaa;
+    transition: all .3s ease-in-out ;
+    cursor: pointer;
+    text-shadow: 1px 1px 1px #fff;
 }
 
-.right-menu {
-    display: flex;
-    flex-direction: column;
-    border: 5px solid #aaa;
-    box-sizing: border-box;
-    color: #fff;
-    padding: 1rem;
-    justify-content: flex-start;
-    align-content: center;
+.select-menu__item p:hover {
+    transform: scale(1.25);
+}
+
+.cell {
+    display: inline-block;
+    width: 32px;
+    height: 32px;
+    line-height: 1rem;
+    font-size: .5rem;
+    background: #555 url("../images/brickwall.png");
+}
+
+.free {
+    background: #555 url("../images/floor.png");
+}
+
+.player {
+    background: url("../images/player.png");
+}
+
+.tunnel {
+    background-color: red;
+}
+
+.start {
+    background: cyan none;
+}
+
+.finish {
+    background: firebrick none;
+}
+
+.item {
+    background: url("../images/chest.png");
 }

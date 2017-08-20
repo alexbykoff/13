@@ -1,10 +1,15 @@
-import {$, rndInt, areaIsClear, updateNeighbours, cellIsFree} from './helpers';
+import {$, rndInt, updateNeighbours, cellIsFree} from './helpers';
 
 export default class Dungeon {
     constructor(side) {
         this.side = side; // length of side (room is square)
         this.cells = 0;   // minimal amount of free cells you can move within
-        this.player = {}; // player stats and coordinates
+        this.player = {   // player stats and coordinates
+            loot: [],     // <-- this is the general loot stash
+            level: 1,
+            gold: 0,
+            exp: 0
+        };
         this.exit = {};   // exit coordinates and its state
         this.chunks = []; // chunks of space to interconnect
     }
@@ -58,6 +63,7 @@ export default class Dungeon {
 
         this.cells = document.querySelectorAll(".free").length;
         this.movePlayerTo(this.player.x, this.player.y);
+        updateNeighbours(this.player.x, this.player.y);
     };
 
     generateChunks() {

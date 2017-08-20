@@ -1,6 +1,7 @@
 export const $ = e => document.querySelector(e);
 
 export const rndInt = (min, max) => Math.floor(Math.random() * (max - min) + min);
+export const rollDice = () => Math.floor(Math.random() * 101);
 
 const getNearCells = (cellX, cellY) => [
     {x: cellX - 1, y: cellY},

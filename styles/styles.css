@@ -42,6 +42,7 @@ body, html {
     box-sizing: border-box;
     line-height: 0;
     background: #555 url("../images/floor.png");
+    position: relative;
 }
 
 .select-menu {
@@ -51,7 +52,7 @@ body, html {
     align-content: center;
 }
 
-.select-menu__item{
+.select-menu__item {
     padding: 1rem;
     font-size: 1.75rem;
     text-align: center;
@@ -59,7 +60,7 @@ body, html {
 
 .select-menu__item p {
     color: #aaa;
-    transition: all .3s ease-in-out ;
+    transition: all .3s ease-in-out;
     cursor: pointer;
     text-shadow: 1px 1px 1px #fff;
 }
@@ -78,7 +79,7 @@ body, html {
 }
 
 .free {
-  background: none;
+    background: none;
 }
 
 .player {
@@ -99,4 +100,20 @@ body, html {
 
 .item {
     background: url("../images/chest.png");
+}
+
+.lootToaster {
+    opacity: 1;
+    padding: .5rem;
+    width: 22rem;
+    height: 3rem;
+    text-align: center;
+    color: yellow;
+    text-shadow: 1px 1px 0 darkgreen;
+    background-color: #888;
+    border: 6px solid #fff;
+    position: absolute;
+    bottom: 1rem;
+    left: calc(50% - 11rem);
+    line-height: 3rem;
 }

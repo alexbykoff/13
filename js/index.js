@@ -1,12 +1,15 @@
 import Dungeon from "./Dungeon";
+import Loot from "./Loot";
 import fx, {play} from "./sounds";
 
-const dungeon = new Dungeon(20);
+export const game = new Dungeon(20);
 document.querySelector(".menu-wrapper").innerHTML = "";
-dungeon.initialize();
-dungeon.buildNewRoom(190);
-dungeon.populateRoom();
-play(fx.introSound);
+game.initialize();
+game.buildNewRoom(190);
+game.populateRoom();
+//play(fx.introSound);
+
+const loot = new Loot();
 
 document.onkeyup = e => {
     let x = 0, y = 0;
@@ -26,5 +29,5 @@ document.onkeyup = e => {
         default:
             break;
     }
-    dungeon.movePlayerTo(dungeon.player.x + x, dungeon.player.y + y);
+    game.movePlayerTo(game.player.x + x, game.player.y + y);
 };

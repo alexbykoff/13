@@ -4,7 +4,7 @@ import fx, {play} from "./sounds";
 const dungeon = new Dungeon(20);
 document.querySelector(".menu-wrapper").innerHTML = "";
 dungeon.initialize();
-dungeon.buildNewRoom(180);
+dungeon.buildNewRoom(190);
 dungeon.populateRoom();
 play(fx.introSound);
 
@@ -28,5 +28,3 @@ document.onkeyup = e => {
     }
     dungeon.movePlayerTo(dungeon.player.x + x, dungeon.player.y + y);
 };
-
-

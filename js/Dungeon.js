@@ -1,4 +1,4 @@
-import {$, rndInt, areaIsClear, updateNeighbours} from './helpers';
+import {$, rndInt, areaIsClear, updateNeighbours, cellIsFree} from './helpers';
 
 export default class Dungeon {
     constructor(side) {
@@ -97,19 +97,19 @@ export default class Dungeon {
         }
     };
 
-    // populateRoom() {
-    //     let itemNumber = Math.floor(this.cells / 20);
-    //     while (itemNumber) {
-    //         const row = rndInt(2, this.side - 2);
-    //         const column = rndInt(2, this.side - 2);
-    //         if (areaIsClear(x, y)) {
-    //             const cell = $(`#c${x}-${y}`);
-    //             cell.classList.add("item");
-    //             cell.classList.remove("free");
-    //             itemNumber--;
-    //         }
-    //     }
-    // }
+    populateRoom() {
+        let itemNumber = Math.floor(this.cells / 20);
+        while (itemNumber) {
+            const x = rndInt(2, this.side - 2);
+            const y = rndInt(2, this.side - 2);
+            if (cellIsFree(x, y)) {
+                const cell = $(`#c${x}-${y}`);
+                cell.classList.add("item");
+                cell.classList.remove("free");
+                itemNumber--;
+            }
+        }
+    }
 
     movePlayerTo(x, y) {
         const newPosition = $(`#c${x}-${y}`);

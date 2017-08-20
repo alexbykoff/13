@@ -22,9 +22,7 @@ body, html {
     background: rgba(0, 0, 0, 0.5);
 }
 
-.item {
-    background: url("../images/chest.png");
-}
+
 
 .item.fade {
     background: none;
@@ -98,4 +96,8 @@ body, html {
 
 .finish {
     background: firebrick none;
+}
+
+.item {
+    background: url("../images/chest.png");
 }

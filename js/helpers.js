@@ -13,6 +13,8 @@ const getNearCells = (cellX, cellY) => [
     {x: cellX + 1, y: cellY - 1},
 ];
 
+export const cellIsFree = (x,y) => [...$(`#c${x}-${y}`).classList].indexOf("free") >=0;
+
 export const updateNeighbours = (x, y) => {
     getNearCells(x, y).forEach(cell => {
         const div = $(`#c${cell.x}-${cell.y}`);

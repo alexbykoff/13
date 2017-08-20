@@ -109,7 +109,7 @@ body, html {
     height: 3rem;
     text-align: center;
     color: yellow;
-    text-shadow: 1px 1px 0 darkgreen;
+    text-shadow: 1px 1px 0 #000;
     background-color: #888;
     border: 6px solid #fff;
     position: absolute;

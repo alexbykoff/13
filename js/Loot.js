@@ -10,6 +10,7 @@ export default class Loot {
         this.name = ""; // applies to non-gold loot only
         this.isItem = false; // if loot is not gold then set this to true
         this.rarity = "";
+        this.color = "#fff";
         this.rollItem();
         const msg = `${this.rarity} ${this.name} ${this.type} worth of ${this.price}g`;
         game.player.loot.push(this);
@@ -50,13 +51,16 @@ export default class Loot {
         const roll = rollDice();
         if (roll <= 60) {
             this.rarity = "common";
+            this.color = "#fff";
         }
         else if (roll > 60 && roll <= 85) {
             this.rarity = "rare";
-            this.name = generateName(2)
+            this.color = "#35ff2b";
+            this.name = generateName(2);
         }
         else {
             this.rarity = "legendary";
+            this.color = "#ff6c29";
             this.name = generateName(1)
         }
     }
@@ -65,6 +69,7 @@ export default class Loot {
         const toast = document.createElement('div');
         toast.className = "lootToaster";
         toast.innerHTML = msg;
+        toast.style.color = this.color;
         document.querySelector(".holder").appendChild(toast);
         setTimeout(() => toast.parentNode.removeChild(toast), 3000);
     }

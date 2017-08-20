@@ -2,6 +2,7 @@ import Dungeon from "./Dungeon";
 import fx, {play} from "./sounds";
 
 const dungeon = new Dungeon(20);
+document.querySelector(".menu-wrapper").innerHTML = "";
 dungeon.initialize();
 dungeon.buildNewRoom(180);
 play(fx.introSound);

@@ -2,12 +2,11 @@ body, html {
     margin: 0;
     padding: 0;
     background-color: #222;
-    font-family: "Arial Black", Arial;
+    font-family: Palatino, "Palatino Linotype", "Palatino LT STD", "Book Antiqua", Georgia, serif;
     width: 100%;
     height: 100%;
     overflow-y: hidden;
 }
-
 
 .level-cell.fade {
     position: relative;
@@ -32,27 +31,12 @@ body, html {
 }
 
 .title {
-    margin-top: 2rem;
-    font-size: 2.5rem;
-    color: #eee;
-    font-weight: lighter;
+    margin-top: 8rem;
+    font-size: 8rem;
+    color: #aaa;
     text-align: center;
-}
-
-.flex-holder {
-    display: flex;
-    justify-content: center;
-}
-
-.right-menu {
-    display: flex;
-    flex-direction: column;
-    border: 5px solid #aaa;
-    box-sizing: border-box;
-    color: #fff;
-    padding: 1rem;
-    justify-content: flex-start;
-    align-content: center;
+    transform: scale(.75, 1.5);
+    text-shadow: 2px 2px 1px #fff;
 }
 
 .holder {
@@ -61,6 +45,30 @@ body, html {
     height: 640px;
     box-sizing: border-box;
     line-height: 0;
+}
+
+.select-menu {
+    display: flex;
+    padding: 0;
+    justify-content: center;
+    align-content: center;
+}
+
+.select-menu__item{
+    padding: 1rem;
+    font-size: 1.75rem;
+    text-align: center;
+}
+
+.select-menu__item p {
+    color: #aaa;
+    transition: all .3s ease-in-out ;
+    cursor: pointer;
+    text-shadow: 1px 1px 1px #fff;
+}
+
+.select-menu__item p:hover {
+    transform: scale(1.25);
 }
 
 .cell {
@@ -72,7 +80,6 @@ body, html {
     background: #555 url("../images/brickwall.png");
 }
 
-
 .free {
     background: #555 url("../images/floor.png");
 }
@@ -80,7 +87,6 @@ body, html {
 .player {
     background: url("../images/player.png");
 }
-
 
 .tunnel {
     background-color: red;

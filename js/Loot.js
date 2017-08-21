@@ -10,11 +10,11 @@ export default class Loot {
         this.name = ""; // applies to non-gold loot only
         this.isItem = false; // if loot is not gold then set this to true
         this.rarity = "";
-        this.color = "#fff";
+        this.color = "#000";
         this.rollItem();
         const msg = `${this.rarity} ${this.name} ${this.type} worth of ${this.price}g`;
-        game.player.loot.push(this);
-        console.log(game.player.loot);
+        console.log(msg);
+        console.log(`Now you have ${game.player.gold} gold`);
         this.toastLoot(msg);
     }
 
@@ -28,6 +28,7 @@ export default class Loot {
         if (roll <= 65) {
             type = "coins";
             price = Math.floor(rndInt(10, 25) * game.player.level * 0.75);
+            game.player.gold += price;
 
         }
         else {
@@ -51,16 +52,16 @@ export default class Loot {
         const roll = rollDice();
         if (roll <= 60) {
             this.rarity = "common";
-            this.color = "#fff";
+            this.color = "#0b6312";
         }
         else if (roll > 60 && roll <= 85) {
             this.rarity = "rare";
-            this.color = "#35ff2b";
+            this.color = "#0b146e";
             this.name = generateName(2);
         }
         else {
             this.rarity = "legendary";
-            this.color = "#ff6c29";
+            this.color = "#8c3e1a";
             this.name = generateName(1)
         }
     }
@@ -69,7 +70,7 @@ export default class Loot {
         const toast = document.createElement('div');
         toast.className = "lootToaster";
         toast.innerHTML = msg;
-        toast.style.color = this.color;
+        toast.style.backgroundColor = this.color;
         document.querySelector(".holder").appendChild(toast);
         setTimeout(() => toast.parentNode.removeChild(toast), 3000);
     }

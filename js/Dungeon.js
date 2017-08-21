@@ -1,4 +1,6 @@
 import {$, rndInt, updateNeighbours, cellIsFree} from './helpers';
+import fx, {play} from "./sounds";
+import Loot from "./Loot";
 
 export default class Dungeon {
     constructor(side) {
@@ -130,6 +132,17 @@ export default class Dungeon {
             newPosition.classList.add("player");
             updateNeighbours(x, y);
             this.updatePlayerPosition(x, y);
+        }
+        else if ([...newPosition.classList].indexOf("item") >= 0) {
+            oldPosition.classList.remove("player", "fade");
+            oldPosition.classList.add("free");
+            newPosition.classList.remove("item", "fade");
+            newPosition.classList.add("player");
+            updateNeighbours(x, y);
+            this.updatePlayerPosition(x, y);
+            this.player.loot.push(new Loot());
+            console.log(this.player.loot);
+            play(fx.coinSound);
         }
     }
 

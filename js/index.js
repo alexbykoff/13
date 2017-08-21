@@ -1,6 +1,6 @@
 import Dungeon from "./Dungeon";
 import Loot from "./Loot";
-import fx, {play} from "./sounds";
+
 
 export const game = new Dungeon(20);
 document.querySelector(".menu-wrapper").innerHTML = "";
@@ -8,8 +8,6 @@ game.initialize();
 game.buildNewRoom(190);
 game.populateRoom();
 //play(fx.introSound);
-
-const loot = new Loot();
 
 document.onkeyup = e => {
     let x = 0, y = 0;

@@ -140,7 +140,7 @@ export default class Dungeon {
             newPosition.classList.add("player");
             updateNeighbours(x, y);
             this.updatePlayerPosition(x, y);
-            this.player.loot.push(new Loot());
+            new Loot();
             console.log(this.player.loot);
             play(fx.coinSound);
         }

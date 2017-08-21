@@ -1,6 +1,4 @@
 import Dungeon from "./Dungeon";
-import Loot from "./Loot";
-
 
 export const game = new Dungeon(20);
 document.querySelector(".menu-wrapper").innerHTML = "";

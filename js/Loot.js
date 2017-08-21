@@ -4,7 +4,7 @@ import {generateName} from "./name";
 
 export default class Loot {
     constructor() {
-        this.id = this.createId(); // used for attr within inventory div
+        this.id = Loot.createId(); // used for attr within inventory div
         this.price = 0;            // price you can sell an item for
         this.type = "";            // type of item: armor, weapon, ring
         this.slot = "";            // slot to place item into: head, chest, hand, leg
@@ -20,7 +20,7 @@ export default class Loot {
         this.toastLoot(msg);
     }
 
-    createId() {
+    static createId() {
         return Math.random().toString(36).substr(2, 10);
     }
 
@@ -54,7 +54,7 @@ export default class Loot {
             }
             else {
                 this.type = "weapon";
-                this.slot ="weapon";
+                this.slot = "weapon";
                 this.price = Math.floor(rndInt(55, 125) * game.player.level * 0.75);
             }
             this.isItem = true;
@@ -85,10 +85,10 @@ export default class Loot {
 
     rollItemStats() {
         let stats = {
-            str: this.rollStat(),
-            vit: this.rollStat(),
-            agi: this.rollStat(),
-            per: this.rollStat()
+            str: Loot.rollStat(),
+            vit: Loot.rollStat(),
+            agi: Loot.rollStat(),
+            per: Loot.rollStat()
         };
         switch (this.slot) {
             case "head":
@@ -109,7 +109,7 @@ export default class Loot {
         return Object.assign(this.stats, stats);
     }
 
-    rollStat() {
+    static rollStat() {
         return Math.floor(rndInt(10, 16) * game.player.level * .65);
     }
 

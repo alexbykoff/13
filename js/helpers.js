@@ -23,13 +23,13 @@ export const updateNeighbours = (x, y) => {
     });
 };
 
-export const areaIsClear = (x, y) => {
-    let clear = true;
-    getNearCells(x, y).forEach(cell => {
-        const div = $(`#c${cell.x}-${cell.y}`);
-        if (div && [...div.classList].indexOf("free") === -1) {
-            clear = false;
-        }
-    });
-    return clear
-};
+// export const areaIsClear = (x, y) => {
+//     let clear = true;
+//     getNearCells(x, y).forEach(cell => {
+//         const div = $(`#c${cell.x}-${cell.y}`);
+//         if (div && [...div.classList].indexOf("free") === -1) {
+//             clear = false;
+//         }
+//     });
+//     return clear
+// };

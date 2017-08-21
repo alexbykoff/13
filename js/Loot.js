@@ -14,7 +14,7 @@ export default class Loot {
         this.color = "#000";       // depends on rarity
         this.stats = {};           // stats that are rolled if isItem
         this.rollItem();           // item generating method
-        const msg = `${this.rarity} ${this.name} ${this.slot} ${this.type} worth of ${this.price}g`;
+        const msg = `${this.name} ${this.rarity} ${this.slot} ${this.type}`;
         console.log(msg);
         console.log(`Now you have ${game.player.gold} gold`);
         this.toastLoot(msg);

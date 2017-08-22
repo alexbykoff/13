@@ -1,17 +1,13 @@
 import {$, rndInt, updateNeighbours, cellIsFree} from './helpers';
 import fx, {play} from "./sounds";
 import Loot from "./Loot";
+import Player from "./Player";
 
 export default class Dungeon {
     constructor(side) {
         this.side = side;   // length of side (room is square)
         this.cells = 0;     // minimal amount of free cells you can move within
-        this.player = {     // player stats and coordinates
-            loot: [],       // <-- this is the general loot stash
-            level: 1,
-            gold: 0,
-            exp: 0
-        };
+        this.player = new Player();
         this.exit = {};     // exit coordinates and its state
         this.chunks = [];   // chunks of space to interconnect
     }
@@ -64,7 +60,7 @@ export default class Dungeon {
         }
 
         this.cells = document.querySelectorAll(".free").length;
-        this.movePlayerTo(this.player.x, this.player.y);
+        this.player.movePlayerTo(this.player.x, this.player.y);
         updateNeighbours(this.player.x, this.player.y);
     };
 
@@ -121,34 +117,6 @@ export default class Dungeon {
         }
     }
 
-    movePlayerTo(x, y) {
-        const newPosition = $(`#c${x}-${y}`);
-        const oldPosition = $(`#c${this.player.x}-${this.player.y}`);
 
-        if ([...newPosition.classList].indexOf("free") >= 0) {
-            oldPosition.classList.remove("player", "fade");
-            oldPosition.classList.add("free");
-            newPosition.classList.remove("free", "fade");
-            newPosition.classList.add("player");
-            updateNeighbours(x, y);
-            this.updatePlayerPosition(x, y);
-        }
-        else if ([...newPosition.classList].indexOf("item") >= 0) {
-            oldPosition.classList.remove("player", "fade");
-            oldPosition.classList.add("free");
-            newPosition.classList.remove("item", "fade");
-            newPosition.classList.add("player");
-            updateNeighbours(x, y);
-            this.updatePlayerPosition(x, y);
-            new Loot();
-            console.log(this.player.loot);
-            play(fx.coinSound);
-        }
-    }
-
-    updatePlayerPosition(x, y) {
-        this.player.x = x;
-        this.player.y = y;
-    }
 
 }

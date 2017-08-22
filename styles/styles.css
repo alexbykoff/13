@@ -117,4 +117,9 @@ body, html {
     font-size: 1.25rem;
     left: calc(50% - 11rem);
     line-height: 3rem;
+    transition: all 2.5s linear;
+}
+
+.lootToaster-fade {
+    opacity: 0;
 }

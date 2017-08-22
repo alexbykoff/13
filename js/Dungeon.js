@@ -1,13 +1,11 @@
 import {$, rndInt, updateNeighbours, cellIsFree} from './helpers';
-import fx, {play} from "./sounds";
-import Loot from "./Loot";
 import Player from "./Player";
 
 export default class Dungeon {
     constructor(side) {
+        this.player = new Player();
         this.side = side;   // length of side (room is square)
         this.cells = 0;     // minimal amount of free cells you can move within
-        this.player = new Player();
         this.exit = {};     // exit coordinates and its state
         this.chunks = [];   // chunks of space to interconnect
     }

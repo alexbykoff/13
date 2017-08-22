@@ -119,6 +119,7 @@ export default class Loot {
         toast.innerHTML = msg;
         toast.style.backgroundColor = this.color;
         document.querySelector(".holder").appendChild(toast);
+        setTimeout(() => toast.classList.add("lootToaster-fade"), 500);
         setTimeout(() => toast.parentNode.removeChild(toast), 3000);
     }
 }

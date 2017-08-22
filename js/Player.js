@@ -1,4 +1,4 @@
-import {$, rndInt, updateNeighbours, cellIsFree} from './helpers';
+import {$, updateNeighbours} from './helpers';
 import fx, {play} from "./sounds";
 import Loot from "./Loot";
 

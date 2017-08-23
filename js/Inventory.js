@@ -4,9 +4,15 @@ import {game} from "./index";
 export default class Inventory {
     constructor() {
         this.slots = 30;
+        this.visible =false
     }
 
-    show() {
+    toggle() {
+        if (this.visible) {
+            this.visible = false;
+            document.body.removeChild($(".inventory"));
+            return;
+        }
         const inv = document.createElement('div');
         inv.className = "inventory";
 
@@ -19,9 +25,6 @@ export default class Inventory {
             inv.appendChild(e);
         });
         document.body.appendChild(inv);
-    }
-
-    hide(){
-        document.body.removeChild($(".inventory"));
+        this.visible = true;
     }
 }

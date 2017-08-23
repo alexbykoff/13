@@ -25,10 +25,7 @@ document.onkeyup = e => {
             y = 1;
             break;
         case 73:
-            inventory.show();
-            break;
-        case 79:
-            inventory.hide();
+            inventory.toggle();
             break;
         default:
             break;

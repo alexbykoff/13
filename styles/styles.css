@@ -1,5 +1,6 @@
 body, html {
     margin: 0;
+    position: relative;
     padding: 0;
     background-color: #222;
     font-family: Palatino, "Palatino Linotype", "Palatino LT STD", "Book Antiqua", Georgia, serif;
@@ -42,6 +43,7 @@ body, html {
     box-sizing: border-box;
     line-height: 0;
     background: #555 url("../images/floor.png");
+    position: relative;
 }
 
 .select-menu {
@@ -51,7 +53,7 @@ body, html {
     align-content: center;
 }
 
-.select-menu__item{
+.select-menu__item {
     padding: 1rem;
     font-size: 1.75rem;
     text-align: center;
@@ -59,7 +61,7 @@ body, html {
 
 .select-menu__item p {
     color: #aaa;
-    transition: all .3s ease-in-out ;
+    transition: all .3s ease-in-out;
     cursor: pointer;
     text-shadow: 1px 1px 1px #fff;
 }
@@ -78,7 +80,7 @@ body, html {
 }
 
 .free {
-  background: none;
+    background: none;
 }
 
 .player {
@@ -99,4 +101,46 @@ body, html {
 
 .item {
     background: url("../images/chest.png");
+}
+
+.lootToaster {
+    opacity: 1;
+    padding: .5rem;
+    width: 22rem;
+    height: 3rem;
+    text-align: center;
+    color: yellow;
+    text-shadow: 1px 1px 0 #000;
+    background-color: #888;
+    border: 4px solid #fff;
+    position: absolute;
+    bottom: -3rem;
+    font-size: 1.25rem;
+    left: calc(50% - 11rem);
+    line-height: 3rem;
+    transition: all 2.5s linear;
+}
+
+.lootToaster-fade {
+    opacity: 0;
+}
+
+.inventory {
+    position: absolute;
+    width: 340px;
+    left: calc(50% - 170px);
+    top: 240px;
+    padding: 32px 10px;
+    background: linear-gradient(to bottom, #f0b7a1 1%, #752201 35%, #752201 0%, #8c3310 50%, #bf6e4e 100%);
+}
+
+.inventory-object {
+    box-sizing: border-box;
+    width: 32px;
+    height: 32px;
+    border: 1px solid white;
+    display: inline-block;
+    line-height: 0;
+    margin: 0;
+    padding: 0;
 }

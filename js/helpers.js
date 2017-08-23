@@ -1,6 +1,7 @@
 export const $ = e => document.querySelector(e);
 
 export const rndInt = (min, max) => Math.floor(Math.random() * (max - min) + min);
+export const rollDice = () => Math.floor(Math.random() * 101);
 
 const getNearCells = (cellX, cellY) => [
     {x: cellX - 1, y: cellY},
@@ -22,13 +23,13 @@ export const updateNeighbours = (x, y) => {
     });
 };
 
-export const areaIsClear = (x, y) => {
-    let clear = true;
-    getNearCells(x, y).forEach(cell => {
-        const div = $(`#c${cell.x}-${cell.y}`);
-        if (div && [...div.classList].indexOf("free") === -1) {
-            clear = false;
-        }
-    });
-    return clear
-};
+// export const areaIsClear = (x, y) => {
+//     let clear = true;
+//     getNearCells(x, y).forEach(cell => {
+//         const div = $(`#c${cell.x}-${cell.y}`);
+//         if (div && [...div.classList].indexOf("free") === -1) {
+//             clear = false;
+//         }
+//     });
+//     return clear
+// };

@@ -1,12 +1,13 @@
 import Dungeon from "./Dungeon";
-import fx, {play} from "./sounds";
+import Inventory from "./Inventory";
 
-const dungeon = new Dungeon(20);
+export const game = new Dungeon(20);
 document.querySelector(".menu-wrapper").innerHTML = "";
-dungeon.initialize();
-dungeon.buildNewRoom(190);
-dungeon.populateRoom();
-play(fx.introSound);
+game.initialize();
+game.buildNewRoom(190);
+game.populateRoom();
+//play(fx.introSound);
+const inventory = new Inventory();
 
 document.onkeyup = e => {
     let x = 0, y = 0;
@@ -23,8 +24,14 @@ document.onkeyup = e => {
         case 40:
             y = 1;
             break;
+        case 73:
+            inventory.show();
+            break;
+        case 79:
+            inventory.hide();
+            break;
         default:
             break;
     }
-    dungeon.movePlayerTo(dungeon.player.x + x, dungeon.player.y + y);
+    game.player.movePlayerTo(game.player.x + x, game.player.y + y);
 };

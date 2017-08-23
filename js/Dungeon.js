@@ -1,12 +1,13 @@
-import {$, rndInt, areaIsClear, updateNeighbours, cellIsFree} from './helpers';
+import {$, rndInt, updateNeighbours, cellIsFree} from './helpers';
+import Player from "./Player";
 
 export default class Dungeon {
     constructor(side) {
-        this.side = side; // length of side (room is square)
-        this.cells = 0;   // minimal amount of free cells you can move within
-        this.player = {}; // player stats and coordinates
-        this.exit = {};   // exit coordinates and its state
-        this.chunks = []; // chunks of space to interconnect
+        this.player = new Player();
+        this.side = side;   // length of side (room is square)
+        this.cells = 0;     // minimal amount of free cells you can move within
+        this.exit = {};     // exit coordinates and its state
+        this.chunks = [];   // chunks of space to interconnect
     }
 
     initialize() {
@@ -52,12 +53,13 @@ export default class Dungeon {
                 }
             }
         for (let r = 0; r < this.chunks.length - 1; r++) {
-            this.buildHorizontalTunnel(this.chunks[r].cx, this.chunks[r + 1].cx, this.chunks[r].cy);
-            this.buildVerticalTunnel(this.chunks[r].cy, this.chunks[r + 1].cy, this.chunks[r + 1].cx);
+            Dungeon.buildHorizontalTunnel(this.chunks[r].cx, this.chunks[r + 1].cx, this.chunks[r].cy);
+            Dungeon.buildVerticalTunnel(this.chunks[r].cy, this.chunks[r + 1].cy, this.chunks[r + 1].cx);
         }
 
         this.cells = document.querySelectorAll(".free").length;
-        this.movePlayerTo(this.player.x, this.player.y);
+        this.player.movePlayerTo(this.player.x, this.player.y);
+        updateNeighbours(this.player.x, this.player.y);
     };
 
     generateChunks() {
@@ -83,7 +85,7 @@ export default class Dungeon {
         this.chunks.push({cx: x + Math.floor(w / 2), cy: y + Math.floor(h / 2)});
     };
 
-    buildHorizontalTunnel(x1, x2, y) {
+    static buildHorizontalTunnel(x1, x2, y) {
         let fromX = Math.min(x1, x2);
         let toX = Math.max(x1, x2);
         for (let x = fromX; x <= toX; x++) {
@@ -91,7 +93,7 @@ export default class Dungeon {
         }
     };
 
-    buildVerticalTunnel(y1, y2, x) {
+    static buildVerticalTunnel(y1, y2, x) {
         let fromY = Math.min(y1, y2);
         let toY = Math.max(y1, y2);
         for (let y = fromY; y <= toY; y++) {
@@ -113,23 +115,6 @@ export default class Dungeon {
         }
     }
 
-    movePlayerTo(x, y) {
-        const newPosition = $(`#c${x}-${y}`);
-        const oldPosition = $(`#c${this.player.x}-${this.player.y}`);
 
-        if ([...newPosition.classList].indexOf("free") >= 0) {
-            oldPosition.classList.remove("player", "fade");
-            oldPosition.classList.add("free");
-            newPosition.classList.remove("free", "fade");
-            newPosition.classList.add("player");
-            updateNeighbours(x, y);
-            this.updatePlayerPosition(x, y);
-        }
-    }
-
-    updatePlayerPosition(x, y) {
-        this.player.x = x;
-        this.player.y = y;
-    }
 
 }

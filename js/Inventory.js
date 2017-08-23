@@ -11,10 +11,11 @@ export default class Inventory {
         inv.className = "inventory";
 
         game.player.loot.forEach(item => {
+            const image = require(`../images/${item.slot}.png`);
             const e = document.createElement('div');
             e.className = "inventory-object";
             e.style.backgroundColor = item.color;
-            e.style.backgroundImage=`url("../images/${item.slot}.png")`;
+            e.style.backgroundImage = `url("${image}")`;
             inv.appendChild(e);
         });
         document.body.appendChild(inv);

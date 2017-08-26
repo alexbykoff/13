@@ -1,3 +1,7 @@
+* {
+  box-sizing: border-box;
+}
+
 body, html {
     margin: 0;
     position: relative;
@@ -7,6 +11,24 @@ body, html {
     width: 100%;
     height: 100%;
     overflow-y: hidden;
+}
+
+.container {
+    margin: 1rem auto;
+    display: flex;
+    justify-content: center;
+}
+
+.sidebar {
+    width: 200px;
+    color: #d27105;
+    border: 2px solid #d27105;
+    padding: 1.5rem;
+    text-transform: uppercase;
+}
+
+.widget {
+    margin-bottom: 1rem;
 }
 
 .cell.fade {
@@ -38,13 +60,13 @@ body, html {
 }
 
 .holder {
-    margin: 1rem auto;
     width: 640px;
     height: 640px;
-    box-sizing: border-box;
+    margin: 0 1rem;
     line-height: 0;
     background: #000;
     position: relative;
+    flex: 0 0 auto;
 }
 
 .select-menu {

@@ -44,8 +44,8 @@ export default class Player {
     }
 
     updateInfobar() {
-        const level = document.getElementById('level');
-        const gold = document.getElementById('gold');
+        const level = $('#level');
+        const gold = $('#gold');
         level.innerHTML = this.level;
         gold.innerHTML = this.gold;
     }

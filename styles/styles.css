@@ -131,7 +131,8 @@ body, html {
     left: calc(50% - 170px);
     top: 240px;
     padding: 32px 10px;
-    background: linear-gradient(to bottom, #f0b7a1 1%, #752201 35%, #752201 0%, #8c3310 50%, #bf6e4e 100%);
+    background: #000;
+    border: 4px solid #d27105;
 }
 
 .inventory-object {

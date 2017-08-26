@@ -20,7 +20,6 @@ export default class Inventory {
             const image = require(`../images/${item.slot}.png`);
             const e = document.createElement('div');
             e.className = "inventory-object";
-            e.style.backgroundColor = item.color;
             e.style.backgroundImage = `url("${image}")`;
             inv.appendChild(e);
         });

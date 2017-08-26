@@ -2,7 +2,6 @@ import Dungeon from "./Dungeon";
 import Inventory from "./Inventory";
 
 export const game = new Dungeon(20);
-document.querySelector(".menu-wrapper").innerHTML = "";
 game.initialize();
 game.buildNewRoom(190);
 game.populateRoom();
@@ -25,10 +24,7 @@ document.onkeyup = e => {
             y = 1;
             break;
         case 73:
-            inventory.show();
-            break;
-        case 79:
-            inventory.hide();
+            inventory.toggle();
             break;
         default:
             break;

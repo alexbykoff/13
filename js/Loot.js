@@ -9,9 +9,7 @@ export default class Loot {
         this.type = "";            // type of item: armor, weapon, ring
         this.slot = "";            // slot to place item into: head, chest, hand, leg
         this.name = "";            // applies to non-gold rare+ loot only
-        this.isItem = false;       // if loot is non-gold then set this to true
         this.rarity = "";          // rarity: common, rare, legendary, artifact
-        this.color = "#000";       // depends on rarity
         this.stats = {};           // stats that are rolled if isItem
         this.rollItem();           // item generating method
         const msg = `${this.name} ${this.rarity} ${this.slot} ${this.type}`;
@@ -49,41 +47,41 @@ export default class Loot {
                 else {
                     this.slot = "leg";
                 }
-
                 this.price = Math.floor(rndInt(15, 40) * game.player.level * 0.75);
             }
             else {
                 this.type = "weapon";
-                this.slot = "weapon";
+                this.slot = "one-hand";
                 this.price = Math.floor(rndInt(55, 125) * game.player.level * 0.75);
             }
-            this.isItem = true;
-            this.rollRarity();
-            this.rollItemStats();
+            Loot.rollRarity();
+            if (this.slot === "one-hand") {
+                Loot.rollWeaponStats();
+            }
+            else {
+                Loot.rollItemStats();
+            }
             game.player.loot.push(this);
         }
 
     }
 
-    rollRarity() {
+    static rollRarity() {
         const roll = rollDice();
         if (roll <= 60) {
             this.rarity = "common";
-            this.color = "#0b6312";
         }
         else if (roll > 60 && roll <= 85) {
             this.rarity = "rare";
-            this.color = "#0b146e";
             this.name = generateName(2);
         }
         else {
             this.rarity = "legendary";
-            this.color = "#8c3e1a";
             this.name = generateName(1)
         }
     }
 
-    rollItemStats() {
+    static rollItemStats() {
         let stats = {
             str: Loot.rollStat(),
             vit: Loot.rollStat(),
@@ -111,6 +109,10 @@ export default class Loot {
 
     static rollStat() {
         return Math.floor(rndInt(10, 16) * game.player.level * .65);
+    }
+
+    static rollWeaponStats() {
+        return Math.floor(rndInt(20, 30) * game.player.level * .45);
     }
 
     toastLoot(msg) {

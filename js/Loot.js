@@ -54,19 +54,19 @@ export default class Loot {
                 this.slot = "one-hand";
                 this.price = Math.floor(rndInt(55, 125) * game.player.level * 0.75);
             }
-            Loot.rollRarity();
+            this.rollRarity();
             if (this.slot === "one-hand") {
-                Loot.rollWeaponStats();
+                this.rollWeaponStats();
             }
             else {
-                Loot.rollItemStats();
+                this.rollItemStats();
             }
             game.player.loot.push(this);
         }
 
     }
 
-    static rollRarity() {
+    rollRarity() {
         const roll = rollDice();
         if (roll <= 60) {
             this.rarity = "common";
@@ -81,7 +81,7 @@ export default class Loot {
         }
     }
 
-    static rollItemStats() {
+    rollItemStats() {
         let stats = {
             str: Loot.rollStat(),
             vit: Loot.rollStat(),
@@ -111,8 +111,11 @@ export default class Loot {
         return Math.floor(rndInt(10, 16) * game.player.level * .65);
     }
 
-    static rollWeaponStats() {
-        return Math.floor(rndInt(20, 30) * game.player.level * .45);
+    rollWeaponStats() {
+        let stats = {
+            damage: Math.floor(rndInt(20, 30) * game.player.level * .45)
+        };
+        return Object.assign(this.stats, stats);
     }
 
     toastLoot(msg) {

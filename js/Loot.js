@@ -28,7 +28,7 @@ export default class Loot {
             this.type = "coins";
             this.price = Math.floor(rndInt(10, 25) * game.player.level * 0.75);
             game.player.gold += this.price;
-
+            game.player.updateInfobar();
         }
         else {
             const secondRoll = rollDice();

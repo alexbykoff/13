@@ -10,6 +10,7 @@ export default class Player {
         this.exp = 0;
         this.x = 0;
         this.y = 0;
+        this.updateInfobar();
     }
 
     movePlayerTo(x, y) {
@@ -40,5 +41,12 @@ export default class Player {
     updatePlayerPosition(x, y) {
         this.x = x;
         this.y = y;
+    }
+
+    updateInfobar() {
+        const level = document.getElementById('level');
+        const gold = document.getElementById('gold');
+        level.innerHTML = this.level;
+        gold.innerHTML = this.gold;
     }
 }

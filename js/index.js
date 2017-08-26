@@ -2,7 +2,6 @@ import Dungeon from "./Dungeon";
 import Inventory from "./Inventory";
 
 export const game = new Dungeon(20);
-document.querySelector(".menu-wrapper").innerHTML = "";
 game.initialize();
 game.buildNewRoom(190);
 game.populateRoom();

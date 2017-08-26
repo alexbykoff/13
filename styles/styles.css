@@ -25,10 +25,15 @@ body, html {
     border: 2px solid #d27105;
     padding: 1.5rem;
     text-transform: uppercase;
+    text-align: center;
 }
 
 .widget {
     margin-bottom: 1rem;
+}
+
+.widget-text {
+  font-size: 3rem;
 }
 
 .cell.fade {
@@ -138,7 +143,7 @@ body, html {
     position: absolute;
     bottom: -3rem;
     left: calc(50% - 11rem);
-    line-height: 3rem;
+    line-height: 1;
     transition: all 2.5s linear;
 }
 

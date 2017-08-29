@@ -110,7 +110,7 @@ export default class Loot {
     rollWeaponStats() {
         return Object.assign(this.stats,
             {
-                stats: Math.floor(rndInt(20, 30) * game.player.level * .45)
+                damage: Math.floor(rndInt(20, 30) * game.player.level * .45)
             });
     }
 

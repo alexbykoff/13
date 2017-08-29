@@ -150,8 +150,32 @@ body, html {
     position: absolute;
     top: 1rem;
     left: 1rem;
-    background-color: #d27105;
+    background-color: #000;
+    border: 2px solid #d27105;
     line-height: 1;
     font-size: 0.75rem;
     padding: 0.5rem;
+    white-space: nowrap;
+}
+
+.t-name {
+    padding: .5rem 2rem;
+    font-size: 1.25rem;
+    text-align: center;
+    background-color: #d27105;
+    color: #000;
+}
+
+.t-desc {
+    padding: .5rem;
+    background-color: #000;
+    color: #d27105;
+}
+
+.t-stat {
+    width: 100%;
+    padding: 0.25rem 1rem;
+    text-align: left;
+    color: #d27105;
+    font-size: 1.15rem;
 }

@@ -1,4 +1,4 @@
-import {rndInt, rollDice} from "./helpers";
+import {rndInt, rollDice, $} from "./helpers";
 import {game} from "./index";
 import {generateName} from "./name";
 
@@ -55,12 +55,8 @@ export default class Loot {
                 this.price = Math.floor(rndInt(55, 125) * game.player.level * 0.75);
             }
             this.rollRarity();
-            if (this.slot === "one-hand") {
-                this.rollWeaponStats();
-            }
-            else {
-                this.rollItemStats();
-            }
+            if (this.slot === "one-hand") this.rollWeaponStats();
+            else this.rollItemStats();
             game.player.loot.push(this);
         }
 
@@ -112,17 +108,17 @@ export default class Loot {
     }
 
     rollWeaponStats() {
-        let stats = {
-            damage: Math.floor(rndInt(20, 30) * game.player.level * .45)
-        };
-        return Object.assign(this.stats, stats);
+        return Object.assign(this.stats,
+            {
+                stats: Math.floor(rndInt(20, 30) * game.player.level * .45)
+            });
     }
 
     toastLoot(msg) {
         const toast = document.createElement('div');
         toast.className = "lootToaster";
         toast.innerHTML = msg;
-        document.querySelector(".holder").appendChild(toast);
+        $(".holder").appendChild(toast);
         setTimeout(() => toast.classList.add("lootToaster-fade"), 500);
         setTimeout(() => toast.parentNode.removeChild(toast), 3000);
     }

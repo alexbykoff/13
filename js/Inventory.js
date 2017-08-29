@@ -21,6 +21,7 @@ export default class Inventory {
             const e = document.createElement('div');
             e.className = "inventory-object";
             e.style.backgroundImage = `url("${image}")`;
+            e.style.borderStyle = item.rarity === "common" ? "none" : item.rarity === "rare" ? "dashed" : "solid";
             inv.appendChild(e);
             // show tooltip
             e.addEventListener('mouseover', () => {

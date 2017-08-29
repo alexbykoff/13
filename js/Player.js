@@ -10,6 +10,13 @@ export default class Player {
         this.exp = 0;
         this.x = 0;
         this.y = 0;
+        this.stats = {
+            str: 25,
+            vit: 25,
+            agi: 25,
+            per: 25
+        };
+        this.gear = {};         // player armor doll
         this.updateInfobar();
     }
 
@@ -44,9 +51,10 @@ export default class Player {
     }
 
     updateInfobar() {
-        const level = document.getElementById('level');
-        const gold = document.getElementById('gold');
+        const level = $('#level');
+        const gold = $('#gold');
         level.innerHTML = this.level;
         gold.innerHTML = this.gold;
+        Object.keys(this.stats).forEach(s => $(`#${s}`).innerHTML = `${s}: ${this.stats[s]}`);
     }
 }

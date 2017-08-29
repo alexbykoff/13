@@ -4,10 +4,11 @@ import Player from "./Player";
 export default class Dungeon {
     constructor(side) {
         this.player = new Player();
-        this.side = side;   // length of side (room is square)
-        this.cells = 0;     // minimal amount of free cells you can move within
-        this.exit = {};     // exit coordinates and its state
-        this.chunks = [];   // chunks of space to interconnect
+        this.side = side;        // length of side (room is square)
+        this.cells = 0;          // minimal amount of free cells you can move within
+        this.exit = {};          // exit coordinates and its state
+        this.chunks = [];        // chunks of space to interconnect
+        this.actionHistory = []; // action text holder
     }
 
     initialize() {

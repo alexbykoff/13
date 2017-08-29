@@ -3,7 +3,7 @@ import Inventory from "./Inventory";
 
 export const game = new Dungeon(20);
 game.initialize();
-game.buildNewRoom(190);
+game.buildNewRoom(120);
 game.populateRoom();
 //play(fx.introSound);
 const inventory = new Inventory();

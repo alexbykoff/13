@@ -6,8 +6,8 @@ body, html {
     margin: 0;
     position: relative;
     padding: 0;
-    background-color: #222;
-    font-family: Palatino, "Palatino Linotype", "Palatino LT STD", "Book Antiqua", Georgia, serif;
+    background-color: #000;
+    font-family: "Lucida Console", Monaco, monospace;
     width: 100%;
     height: 100%;
     overflow-y: hidden;
@@ -24,8 +24,8 @@ body, html {
     color: #d27105;
     border: 2px solid #d27105;
     padding: 1.5rem;
-    text-transform: uppercase;
     text-align: center;
+    font-weight: lighter;
 }
 
 .widget {
@@ -34,6 +34,10 @@ body, html {
 
 .widget-text {
   font-size: 3rem;
+}
+
+.widget-text.small {
+    font-size: 1.25rem;
 }
 
 .cell.fade {
@@ -55,14 +59,6 @@ body, html {
     background: none;
 }
 
-.title {
-    margin-top: 8rem;
-    font-size: 8rem;
-    color: #aaa;
-    text-align: center;
-    transform: scale(.75, 1.5);
-    text-shadow: 2px 2px 1px #fff;
-}
 
 .holder {
     width: 640px;
@@ -72,30 +68,6 @@ body, html {
     background: #000;
     position: relative;
     flex: 0 0 auto;
-}
-
-.select-menu {
-    display: flex;
-    padding: 0;
-    justify-content: center;
-    align-content: center;
-}
-
-.select-menu__item {
-    padding: 1rem;
-    font-size: 1.75rem;
-    text-align: center;
-}
-
-.select-menu__item p {
-    color: #aaa;
-    transition: all .3s ease-in-out;
-    cursor: pointer;
-    text-shadow: 1px 1px 1px #fff;
-}
-
-.select-menu__item p:hover {
-    transform: scale(1.25);
 }
 
 .cell {
@@ -166,7 +138,7 @@ body, html {
     box-sizing: border-box;
     width: 32px;
     height: 32px;
-    border: 1px solid white;
+    border: 2px #d27105;
     display: inline-block;
     line-height: 0;
     margin: 0;

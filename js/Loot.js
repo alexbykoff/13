@@ -1,4 +1,4 @@
-import {rndInt, rollDice, $} from "./helpers";
+import {rndInt, rollDice, $, C} from "./helpers";
 import {game} from "./index";
 import {generateName} from "./name";
 
@@ -115,7 +115,7 @@ export default class Loot {
     }
 
     toastLoot(msg) {
-        const toast = document.createElement('div');
+        const toast = C('div');
         toast.className = "lootToaster";
         toast.innerHTML = msg;
         $(".holder").appendChild(toast);

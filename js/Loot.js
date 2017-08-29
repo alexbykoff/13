@@ -115,7 +115,7 @@ export default class Loot {
     }
 
     toastLoot(msg) {
-        const toast = C('div');
+        const toast = C();
         toast.className = "lootToaster";
         toast.innerHTML = msg;
         $(".holder").appendChild(toast);

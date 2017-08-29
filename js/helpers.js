@@ -1,5 +1,5 @@
 export const $ = e => document.querySelector(e);
-export const C = e => document.createElement(e);
+export const C = e => document.createElement('div');
 export const rndInt = (min, max) => Math.floor(Math.random() * (max - min) + min);
 export const rollDice = () => Math.floor(Math.random() * 101);
 

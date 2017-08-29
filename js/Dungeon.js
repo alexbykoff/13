@@ -14,7 +14,7 @@ export default class Dungeon {
     initialize() {
         const holder = $(".holder");
         for (let i = 0; i < this.side * this.side; i++) {
-            const e = C('div');
+            const e = C();
             e.className = "cell fade";
             // generating id in `x-y` format
             e.id = `c${Math.floor(i % this.side)}-${Math.floor(i / this.side)}`;

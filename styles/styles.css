@@ -151,7 +151,8 @@ body, html {
     top: 1rem;
     left: 1rem;
     background-color: #000;
-    border: 2px solid #d27105;
+    border: 3px solid #d27105;
+    border-radius: 4px;
     line-height: 1;
     font-size: 0.75rem;
     padding: 0.5rem;
@@ -164,6 +165,7 @@ body, html {
     font-size: 1.25rem;
     text-align: center;
     background-color: #d27105;
+    border-radius: 4px;
     color: #000;
 }
 

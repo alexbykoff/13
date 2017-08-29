@@ -134,6 +134,7 @@ body, html {
 }
 
 .inventory-object {
+    position: relative;
     box-sizing: border-box;
     width: 32px;
     height: 32px;
@@ -142,4 +143,14 @@ body, html {
     line-height: 0;
     margin: 0;
     padding: 0;
+}
+
+.inventory-tooltip {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    background-color: #d27105;
+    line-height: 1;
+    font-size: 0.75rem;
+    padding: 0.5rem;
 }

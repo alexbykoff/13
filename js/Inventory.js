@@ -4,7 +4,7 @@ import {game} from "./index";
 export default class Inventory {
     constructor() {
         this.slots = 30;
-        this.visible =false
+        this.visible = false;
     }
 
     toggle() {
@@ -23,6 +23,17 @@ export default class Inventory {
             e.style.backgroundImage = `url("${image}")`;
             e.style.borderStyle = item.rarity === "common" ? "none" : item.rarity === "rare" ? "dashed" : "solid";
             inv.appendChild(e);
+            // show tooltip
+            e.addEventListener('mouseover', () => {
+              const t = document.createElement('div');
+              t.className = "inventory-tooltip";
+              t.innerHTML = `${item.name} ${item.rarity} ${item.slot} ${item.type}`;
+              e.appendChild(t);
+            });
+            // hide tooltip
+            e.addEventListener('mouseout', () => {
+              e.removeChild($(".inventory-tooltip"));
+            });
         });
         document.body.appendChild(inv);
         this.visible = true;

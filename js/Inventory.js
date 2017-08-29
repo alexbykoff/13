@@ -24,14 +24,14 @@ export default class Inventory {
             e.style.borderStyle = item.rarity === "common" ? "none" : item.rarity === "rare" ? "dashed" : "solid";
             inv.appendChild(e);
             // show tooltip
-            e.addEventListener('mouseover', () => {
-              const t = document.createElement('div');
+            e.addEventListener("mouseenter", () => {
+              const t = document.createElement("div");
               t.className = "inventory-tooltip";
               t.innerHTML = `${item.name} ${item.rarity} ${item.slot} ${item.type}`;
               e.appendChild(t);
             });
             // hide tooltip
-            e.addEventListener('mouseout', () => {
+            e.addEventListener("mouseleave", () => {
               e.removeChild($(".inventory-tooltip"));
             });
         });

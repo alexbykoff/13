@@ -156,6 +156,7 @@ body, html {
     font-size: 0.75rem;
     padding: 0.5rem;
     white-space: nowrap;
+    user-select: none;
 }
 
 .t-name {
@@ -170,6 +171,7 @@ body, html {
     padding: .5rem;
     background-color: #000;
     color: #d27105;
+    text-align: center;
 }
 
 .t-stat {

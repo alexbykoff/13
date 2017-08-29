@@ -24,15 +24,21 @@ export default class Inventory {
             e.style.borderStyle = item.rarity === "common" ? "none" : item.rarity === "rare" ? "dashed" : "solid";
             inv.appendChild(e);
             // show tooltip
+            const name = item.name ? `<div class="t-name">${item.name}</div>` : "";
+            let stats = "";
+            Object.keys(item.stats).map(s => {
+                stats += `<div class="t-stat">${s}: ${item.stats[s]}</div>`
+            });
+            const tooltip = name + `<div class="t-desc">${item.rarity} ${item.slot} ${item.type}</div>${stats}`;
             e.addEventListener("mouseenter", () => {
-              const t = document.createElement("div");
-              t.className = "inventory-tooltip";
-              t.innerHTML = `${item.name} ${item.rarity} ${item.slot} ${item.type}`;
-              e.appendChild(t);
+                const t = document.createElement("div");
+                t.className = "inventory-tooltip";
+                t.innerHTML = tooltip;
+                e.appendChild(t);
             });
             // hide tooltip
             e.addEventListener("mouseleave", () => {
-              e.removeChild($(".inventory-tooltip"));
+                e.removeChild($(".inventory-tooltip"));
             });
         });
         document.body.appendChild(inv);

@@ -1,4 +1,4 @@
-import {$} from "./helpers";
+import {$, C} from "./helpers";
 import {game} from "./index";
 
 export default class Inventory {
@@ -13,12 +13,12 @@ export default class Inventory {
             document.body.removeChild($(".inventory"));
             return;
         }
-        const inv = document.createElement('div');
+        const inv = C();
         inv.className = "inventory";
 
         game.player.loot.forEach(item => {
             const image = require(`../images/${item.slot}.png`);
-            const e = document.createElement('div');
+            const e = C();
             e.className = "inventory-object";
             e.style.backgroundImage = `url("${image}")`;
             e.style.borderStyle = item.rarity === "common" ? "none" : item.rarity === "rare" ? "dashed" : "solid";
@@ -31,7 +31,7 @@ export default class Inventory {
             });
             const tooltip = name + `<div class="t-desc">${item.rarity} ${item.slot} ${item.type}</div>${stats}`;
             e.addEventListener("mouseenter", () => {
-                const t = document.createElement("div");
+                const t = C();
                 t.className = "inventory-tooltip";
                 t.innerHTML = tooltip;
                 e.appendChild(t);

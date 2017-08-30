@@ -16,6 +16,7 @@ export default class Player {
             agi: 25,
             per: 25
         };
+        this.hp = this.stats.vit * 11;
         this.gear = {};         // player armor doll
         this.updateInfobar();
     }

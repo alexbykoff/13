@@ -25,18 +25,14 @@ export default class Player {
         const oldPosition = $(`#c${this.x}-${this.y}`);
 
         if ([...newPosition.classList].indexOf("free") >= 0) {
-            oldPosition.classList.remove("player", "fade");
-            oldPosition.classList.add("free");
-            newPosition.classList.remove("free", "fade");
-            newPosition.classList.add("player");
+            oldPosition.className ="free cell";
+            newPosition.className= "player cell";
             updateNeighbours(x, y);
             this.updatePlayerPosition(x, y);
         }
         else if ([...newPosition.classList].indexOf("item") >= 0) {
-            oldPosition.classList.remove("player", "fade");
-            oldPosition.classList.add("free");
-            newPosition.classList.remove("item", "fade");
-            newPosition.classList.add("player");
+            oldPosition.className ="free cell";
+            newPosition.className= "player cell";
             updateNeighbours(x, y);
             this.updatePlayerPosition(x, y);
             new Loot();

@@ -52,7 +52,7 @@ body, html {
     right: 0;
     bottom: 0;
     background: #d27105;
-    opacity: .95;
+    opacity: .98;
 }
 
 .item.fade {
@@ -101,6 +101,9 @@ body, html {
 
 .item {
     background: url("../images/treasure.png");
+}
+.enemy {
+    background: url("../images/skeleton.png");
 }
 
 .lootToaster {

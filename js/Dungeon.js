@@ -109,7 +109,7 @@ export default class Dungeon {
             const y = rndInt(2, this.side - 2);
             if (cellIsFree(x, y)) {
                 const cell = $(`#c${x}-${y}`);
-                cell.classList.add("item");
+                cell.classList.add("enemy");
                 cell.classList.remove("free");
                 itemNumber--;
             }

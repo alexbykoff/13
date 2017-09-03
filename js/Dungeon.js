@@ -118,7 +118,7 @@ export default class Dungeon {
         }
     }
 
-    startBattle(enemy, player) {
+    startBattle(enemy, player, onWin) {
         console.log("Battle started");
         this.canMove = false;
 
@@ -127,15 +127,15 @@ export default class Dungeon {
         battle.innerHTML = `Battle with ${enemy.name}`;
         document.body.appendChild(battle);
 
-        this.battleLogger = setInterval(() => this.hitEnemy(enemy, player), 1500);
+        this.battleLogger = setInterval(() => this.hitEnemy(enemy, player, onWin), 1500);
     }
 
-    hitEnemy(enemy, player) {
+    hitEnemy(enemy, player, onWin) {
         const log = C();
         if (enemy.hp - player.stats.damage <= 0) {
             log.innerHTML = `Enemy died.`;
             $(".battle").appendChild(log);
-            this.endBattle();
+            this.endBattle(onWin);
         } else {
             enemy.hp = enemy.hp - player.stats.damage;
             log.innerHTML = `Enemy has ${enemy.hp} more health points`;
@@ -143,7 +143,7 @@ export default class Dungeon {
         }
     }
 
-    endBattle() {
+    endBattle(onWin) {
         console.log("Battle ended");
         clearInterval(this.battleLogger)
         setTimeout(() => {
@@ -151,6 +151,7 @@ export default class Dungeon {
             this.canMove = true;
         }, 2000);
 
+        onWin();
     }
 
 }

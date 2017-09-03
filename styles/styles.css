@@ -126,6 +126,11 @@ body, html {
     opacity: 0;
 }
 
+.battle {
+  color: #d27105;
+}
+
+.battle,
 .inventory {
     position: absolute;
     width: 340px;

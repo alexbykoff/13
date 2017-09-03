@@ -9,6 +9,8 @@ export default class Dungeon {
         this.exit = {};          // exit coordinates and its state
         this.chunks = [];        // chunks of space to interconnect
         this.actionHistory = []; // action text holder
+        this.canMove = true;
+        this.battleLogger;
     }
 
     initialize() {
@@ -116,6 +118,35 @@ export default class Dungeon {
         }
     }
 
+    startBattle(enemy, player) {
+        console.log("Battle started");
+        this.canMove = false;
 
+        const battle = C();
+        battle.className = "battle";
+        battle.innerHTML = `Battle with ${enemy.name}`;
+        document.body.appendChild(battle);
+
+        this.battleLogger = setInterval(() => this.hitEnemy(enemy, player), 1000);
+    }
+
+    hitEnemy(enemy, player) {
+      const log = C();
+      if (enemy.hp - player.stats.damage <= 0) {
+          log.innerHTML = `Enemy died.`;
+          this.endBattle();
+      } else {
+          enemy.hp = enemy.hp - player.stats.damage;
+          log.innerHTML = `Enemy has ${enemy.hp} more health points`;
+          $(".battle").appendChild(log);
+      }
+    }
+
+    endBattle() {
+        console.log("Battle ended");
+        clearInterval(this.battleLogger)
+        document.body.removeChild($('.battle'));
+        this.canMove = true;
+    }
 
 }

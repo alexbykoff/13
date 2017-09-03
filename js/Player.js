@@ -1,6 +1,8 @@
 import {$, updateNeighbours} from './helpers';
 import fx, {play} from "./sounds";
 import Loot from "./Loot";
+import Enemy from "./Enemy";
+import {game} from "./index";
 
 export default class Player {
     constructor() {
@@ -40,6 +42,16 @@ export default class Player {
             new Loot();
             console.log(this.loot);
             play(fx.coinSound);
+        }
+        else if ([...newPosition.classList].indexOf("enemy") >= 0) {
+            oldPosition.className ="free cell";
+            newPosition.className= "player cell";
+            updateNeighbours(x, y);
+            this.updatePlayerPosition(x, y);
+            const enemy = new Enemy();
+            const player = this;
+            console.log("enemy detected", enemy, player);
+            game.startBattle(enemy, player);
         }
     }
 

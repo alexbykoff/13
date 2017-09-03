@@ -49,8 +49,9 @@ export default class Player {
             updateNeighbours(x, y);
             this.updatePlayerPosition(x, y);
             const enemy = new Enemy();
-            console.log("enemy detected", enemy);
-            game.startBattle(enemy);
+            const player = this;
+            console.log("enemy detected", enemy, player);
+            game.startBattle(enemy, player);
         }
     }
 

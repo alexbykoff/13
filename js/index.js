@@ -29,5 +29,5 @@ document.onkeyup = e => {
         default:
             break;
     }
-    game.player.movePlayerTo(game.player.x + x, game.player.y + y);
+    if (game.canMove) game.player.movePlayerTo(game.player.x + x, game.player.y + y);
 };

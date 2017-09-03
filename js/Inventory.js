@@ -43,6 +43,7 @@ export default class Inventory {
                     game.player.loot.splice(game.player.loot.findIndex(i => i.id === item.id), 1);
                     console.log('equipped ' + item);
                     event.target.remove();
+                    game.player.updateInfobar();
                     console.log(game.player.loot);
                     return console.log(game.player.gear);
                 }

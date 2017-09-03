@@ -24,7 +24,7 @@ export default class Loot {
 
     rollItem() {
         const roll = rollDice();
-        if (roll <= 50) {
+        if (roll <= 10) {
             this.type = "coins";
             this.price = Math.floor(rndInt(10, 25) * game.player.level * 0.75);
             game.player.gold += this.price;

@@ -46,10 +46,9 @@ export default class Player {
         else if ([...newPosition.classList].indexOf("enemy") >= 0) {
             const enemy = new Enemy();
             const player = this;
-            const onWin = () => {
-              newPosition.classList = "cell item";
-            }
-            game.startBattle(enemy, player, onWin);
+            game.startBattle(enemy, player, () => {
+                newPosition.classList = "cell item";
+            });
 
         }
     }
@@ -66,9 +65,7 @@ export default class Player {
                 this.stats[stat] += this.gear[item].stats[stat] || 0;
             })
         });
-        const level = $('#level');
         const gold = $('#gold');
-        level.innerHTML = this.level;
         gold.innerHTML = this.gold;
         Object.keys(this.stats).forEach(s => $(`#${s}`).innerHTML = `${s}: ${this.stats[s]}`);
     }

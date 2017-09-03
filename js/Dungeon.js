@@ -1,5 +1,6 @@
 import {$, C, rndInt, updateNeighbours, cellIsFree} from './helpers';
 import Player from "./Player";
+import fx, {play} from "./sounds";
 
 export default class Dungeon {
     constructor(side) {
@@ -10,7 +11,7 @@ export default class Dungeon {
         this.chunks = [];        // chunks of space to interconnect
         this.actionHistory = []; // action text holder
         this.canMove = true;
-        this.battleLogger;
+        this.battleLogger = null;
     }
 
     initialize() {
@@ -105,13 +106,13 @@ export default class Dungeon {
     };
 
     populateRoom() {
-        let itemNumber = Math.floor(this.cells / 20);
+        let itemNumber = Math.floor(this.cells / 14);
         while (itemNumber) {
             const x = rndInt(2, this.side - 2);
             const y = rndInt(2, this.side - 2);
             if (cellIsFree(x, y)) {
                 const cell = $(`#c${x}-${y}`);
-                Math.random() <= 0.75 ? cell.classList.add("item") : cell.classList.add("enemy");
+                cell.classList.add("enemy");
                 cell.classList.remove("free");
                 itemNumber--;
             }
@@ -119,14 +120,11 @@ export default class Dungeon {
     }
 
     startBattle(enemy, player, onWin) {
-        console.log("Battle started");
         this.canMove = false;
-
         const battle = C();
         battle.className = "battle";
         battle.innerHTML = `Battle with ${enemy.name}`;
         document.body.appendChild(battle);
-
         this.battleLogger = setInterval(() => this.hitEnemy(enemy, player, onWin), 1500);
     }
 
@@ -135,8 +133,10 @@ export default class Dungeon {
         if (enemy.hp - player.stats.damage <= 0) {
             log.innerHTML = `Enemy died.`;
             $(".battle").appendChild(log);
+            play(fx.victorySound);
             this.endBattle(onWin);
         } else {
+            play(fx.hitSound);
             enemy.hp = enemy.hp - player.stats.damage;
             log.innerHTML = `Enemy has ${enemy.hp} more health points`;
             $(".battle").appendChild(log);
@@ -144,13 +144,11 @@ export default class Dungeon {
     }
 
     endBattle(onWin) {
-        console.log("Battle ended");
-        clearInterval(this.battleLogger)
+        clearInterval(this.battleLogger);
         setTimeout(() => {
             document.body.removeChild($('.battle'));
             this.canMove = true;
         }, 2000);
-
         onWin();
     }
 

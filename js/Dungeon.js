@@ -111,7 +111,7 @@ export default class Dungeon {
             const y = rndInt(2, this.side - 2);
             if (cellIsFree(x, y)) {
                 const cell = $(`#c${x}-${y}`);
-                Math.random() <= 0.75 ? cell.classList.add("item"): cell.classList.add("enemy");
+                Math.random() <= 0.75 ? cell.classList.add("item") : cell.classList.add("enemy");
                 cell.classList.remove("free");
                 itemNumber--;
             }
@@ -127,26 +127,30 @@ export default class Dungeon {
         battle.innerHTML = `Battle with ${enemy.name}`;
         document.body.appendChild(battle);
 
-        this.battleLogger = setInterval(() => this.hitEnemy(enemy, player), 1000);
+        this.battleLogger = setInterval(() => this.hitEnemy(enemy, player), 1500);
     }
 
     hitEnemy(enemy, player) {
-      const log = C();
-      if (enemy.hp - player.stats.damage <= 0) {
-          log.innerHTML = `Enemy died.`;
-          this.endBattle();
-      } else {
-          enemy.hp = enemy.hp - player.stats.damage;
-          log.innerHTML = `Enemy has ${enemy.hp} more health points`;
-          $(".battle").appendChild(log);
-      }
+        const log = C();
+        if (enemy.hp - player.stats.damage <= 0) {
+            log.innerHTML = `Enemy died.`;
+            $(".battle").appendChild(log);
+            this.endBattle();
+        } else {
+            enemy.hp = enemy.hp - player.stats.damage;
+            log.innerHTML = `Enemy has ${enemy.hp} more health points`;
+            $(".battle").appendChild(log);
+        }
     }
 
     endBattle() {
         console.log("Battle ended");
         clearInterval(this.battleLogger)
-        document.body.removeChild($('.battle'));
-        this.canMove = true;
+        setTimeout(() => {
+            document.body.removeChild($('.battle'));
+            this.canMove = true;
+        }, 2000);
+
     }
 
 }

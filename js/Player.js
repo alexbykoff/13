@@ -44,14 +44,13 @@ export default class Player {
             play(fx.coinSound);
         }
         else if ([...newPosition.classList].indexOf("enemy") >= 0) {
-            oldPosition.className ="free cell";
-            newPosition.className= "player cell";
-            updateNeighbours(x, y);
-            this.updatePlayerPosition(x, y);
             const enemy = new Enemy();
             const player = this;
-            console.log("enemy detected", enemy, player);
-            game.startBattle(enemy, player);
+            const onWin = () => {
+              newPosition.classList = "cell item";
+            }
+            game.startBattle(enemy, player, onWin);
+
         }
     }
 

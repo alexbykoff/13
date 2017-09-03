@@ -126,6 +126,7 @@ body, html {
     opacity: 0;
 }
 
+.battle,
 .inventory {
     position: absolute;
     width: 340px;

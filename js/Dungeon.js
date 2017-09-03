@@ -116,6 +116,13 @@ export default class Dungeon {
         }
     }
 
+    startBattle(enemy) {
+      console.log("Battle started")
+      const battle = C();
+      battle.className = "battle";
+      battle.innerHTML = enemy.name;
 
+      document.body.appendChild(battle);
+    }
 
 }

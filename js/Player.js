@@ -14,7 +14,8 @@ export default class Player {
             str: 25,
             vit: 25,
             agi: 25,
-            per: 25
+            per: 25,
+            damage: 25
         };
         this.hp = this.stats.vit * 11;
         this.gear = {};         // player armor doll

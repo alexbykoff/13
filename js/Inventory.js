@@ -16,9 +16,10 @@ export default class Inventory {
         const inv = C();
         inv.className = "inventory";
 
-        game.player.loot.forEach(item => {
+        game.player.loot.forEach((item, index) => {
             const image = require(`../images/${item.slot}.png`);
             const e = C();
+            e.setAttribute("data-id", item.id);
             e.className = "inventory-object";
             e.style.backgroundImage = `url("${image}")`;
             e.style.borderStyle = item.rarity === "common" ? "none" : item.rarity === "rare" ? "dashed" : "solid";
@@ -35,6 +36,19 @@ export default class Inventory {
                 t.className = "inventory-tooltip";
                 t.innerHTML = tooltip;
                 e.appendChild(t);
+            });
+            e.addEventListener("dblclick", (event) => {
+                if (!game.player.gear[item.slot]) {
+                    game.player.gear[item.slot] = item;
+                    game.player.loot.splice(game.player.loot.findIndex(i => i.id === item.id), 1);
+                    console.log('equipped ' + item);
+                    event.target.remove();
+                    game.player.updateInfobar();
+                    console.log(game.player.loot);
+                    return console.log(game.player.gear);
+                }
+                console.log('slot is equipped. todo replace in inventory');
+                return console.log(game.player.gear);
             });
             // hide tooltip
             e.addEventListener("mouseleave", () => {

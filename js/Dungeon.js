@@ -122,24 +122,37 @@ export default class Dungeon {
     startBattle(enemy, player, onWin) {
         this.canMove = false;
         const battle = C();
+        this.playerTurn = true;
         battle.className = "battle";
-        battle.innerHTML = `Battle with ${enemy.name}`;
+        battle.innerHTML = `A foul ${enemy.name} stands before you!`;
         document.body.appendChild(battle);
-        this.battleLogger = setInterval(() => this.hitEnemy(enemy, player, onWin), 1500);
+        this.battleLogger = setInterval(() => this.performTurn(enemy, player, onWin), 1500);
     }
 
-    hitEnemy(enemy, player, onWin) {
+    performTurn(enemy, player, onWin) {
         const log = C();
-        if (enemy.hp - player.stats.damage <= 0) {
-            log.innerHTML = `Enemy died.`;
-            $(".battle").appendChild(log);
-            play(fx.victorySound);
-            this.endBattle(onWin);
+        if (this.playerTurn) {
+            this.playerTurn = false;
+            let damage = Math.floor(player.stats.damage * player.stats.str / 15);
+            damage = rndInt(damage - damage / 5, damage + damage / 5);
+            const crit = player.stats.agi >= (player.stats.str + player.stats.damage) ? 2 : 1;
+            damage *= crit;
+            enemy.hp -= damage;
+            if (enemy.hp <= 0) {
+                log.innerHTML = `Enemy dies as you deliver a massive blow of ${damage} damage!`;
+                $(".battle").appendChild(log);
+                play(fx.victorySound);
+                this.endBattle(onWin);
+            } else {
+                play(fx.hitSound);
+                log.innerHTML = `You hit enemy for ${damage} damage!`;
+                $(".battle").appendChild(log);
+            }
         } else {
-            play(fx.hitSound);
-            enemy.hp = enemy.hp - player.stats.damage;
-            log.innerHTML = `Enemy has ${enemy.hp} more health points`;
+            this.playerTurn = true;
+            log.innerHTML = `Enemy hits your for some damage.`;
             $(".battle").appendChild(log);
+            play(fx.hitSound);
         }
     }
 

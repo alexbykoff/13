@@ -27,15 +27,16 @@ export default class Player {
             o.className = "free cell";
             n.className = "player cell";
             updateNeighbours(x, y);
-            this.newPos(x, y);
+            this.x = x;
+            this.y = y;
         }
         else if ([...n.classList].indexOf("item") >= 0) {
             o.className = "free cell";
             n.className = "player cell";
             updateNeighbours(x, y);
-            this.newPos(x, y);
+            this.x = x;
+            this.y = y;
             new Loot();
-            console.log(this.loot);
             play(fx.coinSound);
         }
         else if ([...n.classList].indexOf("enemy") >= 0) {
@@ -45,11 +46,6 @@ export default class Player {
                 n.classList = "cell item";
             });
         }
-    }
-
-    newPos(x, y) {
-        this.x = x;
-        this.y = y;
     }
 
     updateInfobar() {

@@ -124,7 +124,7 @@ export default class Dungeon {
         const battle = C();
         this.playerTurn = true;
         battle.className = "battle";
-        battle.innerHTML = `A foul <span>${enemy.name}</span> with ${enemy.hp} health stands before you!`;
+        battle.innerHTML = `A foul <i>${enemy.name}</i> with ${enemy.hp} health stands before you!`;
         document.body.appendChild(battle);
         this.battleLogger = setInterval(() => this.performTurn(enemy, player, onWin), 1200);
     }
@@ -139,13 +139,13 @@ export default class Dungeon {
             damage *= crit;
             enemy.hp -= damage;
             if (enemy.hp <= 0) {
-                log.innerHTML = `<span>${enemy.name}</span> dies as you deliver a massive blow of ${damage} damage!`;
+                log.innerHTML = `<i>${enemy.name}</i> dies as you deliver a massive blow of ${damage} damage!`;
                 $(".battle").appendChild(log);
                 play(fx.victorySound);
                 this.endBattle(onWin);
             } else {
                 play(fx.hitSound);
-                log.innerHTML = `You hit <span>${enemy.name}</span>: ${damage} damage!`;
+                log.innerHTML = `You hit <i>${enemy.name}</i>: ${damage} damage!`;
                 $(".battle").appendChild(log);
             }
         } else {
@@ -159,7 +159,7 @@ export default class Dungeon {
                 enrage = "Enraged "
             }
             player.hp -= damage;
-            log.innerHTML = `<span>${enrage + enemy.name}</span> hits you: ${damage} damage`;
+            log.innerHTML = `<i>${enrage + enemy.name}</i> hits you: ${damage} damage`;
             if (player.hp < 0) {
                 player.hp = 0;
                 log.innerHTML += `\nYou died!`

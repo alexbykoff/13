@@ -17,8 +17,6 @@ export default class Player {
             per: 25,
             damage: 25
         };
-        this.hp = this.stats.vit * 10;
-        this.maxHp = this.hp;
         this.gear = {};         // player armor doll
         this.updateInfobar();
         this.updateInventory();

@@ -1,17 +1,16 @@
 export const $ = e => document.querySelector(e);
 export const C = e => document.createElement('div');
 export const rndInt = (min, max) => Math.floor(Math.random() * (max - min) + min);
-export const rollDice = () => Math.floor(Math.random() * 101);
 
-const getNearCells = (cellX, cellY) => [
-    {x: cellX - 1, y: cellY},
-    {x: cellX, y: cellY + 1},
-    {x: cellX + 1, y: cellY},
-    {x: cellX, y: cellY - 1},
-    {x: cellX - 1, y: cellY - 1},
-    {x: cellX + 1, y: cellY + 1},
-    {x: cellX - 1, y: cellY + 1},
-    {x: cellX + 1, y: cellY - 1},
+const getNearCells = (cx, cy) => [
+    {x: cx - 1, y: cy},
+    {x: cx, y: cy + 1},
+    {x: cx + 1, y: cy},
+    {x: cx, y: cy - 1},
+    {x: cx - 1, y: cy - 1},
+    {x: cx + 1, y: cy + 1},
+    {x: cx - 1, y: cy + 1},
+    {x: cx + 1, y: cy - 1},
 ];
 
 export const cellIsFree = (x,y) => [...$(`#c${x}-${y}`).classList].indexOf("free") >=0;

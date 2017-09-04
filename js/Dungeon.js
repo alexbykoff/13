@@ -10,7 +10,7 @@ export default class Dungeon {
         this.exit = {};          // exit coordinates and its state
         this.chunks = [];        // chunks of space to interconnect
         this.canMove = true;
-        this.battleLogger = null;
+        this.logger = null;
         this.turnCount = 0;
     }
 
@@ -124,9 +124,9 @@ export default class Dungeon {
         const battle = C();
         this.playerTurn = true;
         battle.className = "battle";
-        battle.innerHTML = `A foul <span>${enemy.name}</span> with ${enemy.hp} health stands before you!`;
+        battle.innerHTML = `A foul <i>${enemy.name}</i> with ${enemy.hp} health stands before you!`;
         document.body.appendChild(battle);
-        this.battleLogger = setInterval(() => this.performTurn(enemy, player, onWin), 1200);
+        this.logger = setInterval(() => this.performTurn(enemy, player, onWin), 1200);
     }
 
     performTurn(enemy, player, onWin) {
@@ -139,13 +139,13 @@ export default class Dungeon {
             damage *= crit;
             enemy.hp -= damage;
             if (enemy.hp <= 0) {
-                log.innerHTML = `<span>${enemy.name}</span> dies as you deliver a massive blow of ${damage} damage!`;
+                log.innerHTML = `<i>${enemy.name}</i> dies as you deliver a massive blow of ${damage}hp!`;
                 $(".battle").appendChild(log);
                 play(fx.victorySound);
                 this.endBattle(onWin);
             } else {
                 play(fx.hitSound);
-                log.innerHTML = `You hit <span>${enemy.name}</span>: ${damage} damage!`;
+                log.innerHTML = `You hit <i>${enemy.name}</i>: -${damage}hp`;
                 $(".battle").appendChild(log);
             }
         } else {
@@ -153,16 +153,16 @@ export default class Dungeon {
             this.turnCount++;
             this.playerTurn = true;
             let damage = enemy.damage + this.turnCount * 2;
-            let enrage = "";
+            let e = "";
             if (this.turnCount >= 7) {
                 damage *= 2;
-                enrage = "Enraged "
+                e = "Enraged "
             }
             player.hp -= damage;
-            log.innerHTML = `<span>${enrage + enemy.name}</span> hits you: ${damage} damage`;
+            log.innerHTML = `<i>${e + enemy.name}</i> hits you: -${damage}hp`;
             if (player.hp < 0) {
                 player.hp = 0;
-                log.innerHTML += `\nYou died!`
+                log.innerHTML += `\nYou died!`;
                 $(".battle").appendChild(log);
                 return this.endBattle();
             }
@@ -173,7 +173,7 @@ export default class Dungeon {
     endBattle(onWin) {
         this.turnCount = 0;
         this.player.hp = this.player.maxHp;
-        clearInterval(this.battleLogger);
+        clearInterval(this.logger);
         setTimeout(() => {
             document.body.removeChild($('.battle'));
             this.canMove = true;

@@ -1,10 +1,10 @@
-import {rndInt, rollDice, $, C} from "./helpers";
+import {rndInt, $, C} from "./helpers";
 import {game} from "./index";
 import {generateName} from "./name";
 
 export default class Loot {
     constructor() {
-        this.id = Loot.createId(); // used for attr within inventory div
+        this.id = Loot.ID(); // used for attr within inventory div
         this.price = 0;            // price you can sell an item for
         this.type = "";            // type of item: armor, weapon, ring
         this.slot = "";            // slot to place item into: head, chest, hand, leg
@@ -13,16 +13,15 @@ export default class Loot {
         this.stats = {};           // stats that are rolled if isItem
         this.rollItem();           // item generating method
         const msg = `${this.name} ${this.rarity} ${this.slot} ${this.type}`;
-        console.log(msg);
         this.toastLoot(msg);
     }
 
-    static createId() {
+    static ID() {
         return Math.random().toString(36).substr(2, 10);
     }
 
     rollItem() {
-        const roll = rollDice();
+        const roll = rndInt(0, 100);
         if (roll <= 10) {
             this.type = "coins";
             this.price = Math.floor(rndInt(10, 25) * 0.75);
@@ -30,10 +29,10 @@ export default class Loot {
             game.player.updateInfobar();
         }
         else {
-            const secondRoll = rollDice();
+            const secondRoll = rndInt(0, 100);
             if (secondRoll <= 65) {
                 this.type = "armor";
-                const thirdRoll = rollDice();
+                const thirdRoll = rndInt(0, 100);
                 if (thirdRoll <= 25) {
                     this.slot = "head";
                 }
@@ -56,14 +55,14 @@ export default class Loot {
             this.rollRarity();
             if (this.slot === "one-hand") this.rollWeaponStats();
             else this.rollItemStats();
-            this.alterStatsToQuality();
+            this.alterStat();
             game.player.loot.push(this);
         }
 
     }
 
     rollRarity() {
-        const roll = rollDice();
+        const roll = rndInt(0, 100);
         if (roll <= 60) {
             this.rarity = "common";
         }
@@ -114,7 +113,7 @@ export default class Loot {
             });
     }
 
-    alterStatsToQuality(){
+    alterStat(){
         Object.keys(this.stats).forEach(s => this.rarity === "rare"
             ? this.stats[s] = Math.floor(this.stats[s] * 1.5)
             : this.rarity === "legendary" ? this.stats[s] *= 2 : null);

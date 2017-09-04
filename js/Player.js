@@ -72,12 +72,25 @@ export default class Player {
     updateInventory() {
         const inv = $('#inventory');
 
-        Object.keys(this.gear).forEach(item => {
+        Object.keys(this.gear).forEach(group => {
             console.log(this.gear)
-            console.log(item)
-            const i = C();
-            i.innerHTML = `${item.rarity} ${item.slot} ${item.type}`;
-            inv.appendChild(i);
-        })
+            console.log(group)
+            const heading = `<h4>${group}</h4><div>${this.gear[group].rarity} ${this.gear[group].slot} ${this.gear[group].type}</div>`;
+
+            if ($(`.${group}`)) {
+                $(`.${group}`).innerHTML = heading;
+                Object.keys(this.gear[group].stats).forEach(s => $(`.${group} stats`).innerHTML = `${s}: ${this.gear[group].stats[s]}`);
+            } else {
+                const g = C();
+                g.classList.add(group);
+                g.innerHTML = heading;
+
+                const i = C();
+                i.classList.add("stats");
+                inv.appendChild(g);
+                $(`.${group}`).appendChild(i);
+                Object.keys(this.gear[group].stats).forEach(s => i.innerHTML = `${s}: ${this.gear[group].stats[s]}`);
+            }
+        });
     }
 }

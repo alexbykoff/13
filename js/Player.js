@@ -1,4 +1,4 @@
-import {$, updateNeighbours} from './helpers';
+import {$, C, updateNeighbours} from './helpers';
 import fx, {play} from "./sounds";
 import Loot from "./Loot";
 import Enemy from "./Enemy";
@@ -21,6 +21,7 @@ export default class Player {
         this.maxHp = this.hp;
         this.gear = {};         // player armor doll
         this.updateInfobar();
+        this.updateInventory();
     }
 
     movePlayerTo(x, y) {
@@ -68,5 +69,17 @@ export default class Player {
         const gold = $('#gold');
         gold.innerHTML = this.gold;
         Object.keys(this.stats).forEach(s => $(`#${s}`).innerHTML = `${s}: ${this.stats[s]}`);
+    }
+
+    updateInventory() {
+        const inv = $('#inventory');
+
+        Object.keys(this.gear).forEach(item => {
+            console.log(this.gear)
+            console.log(item)
+            const i = C();
+            i.innerHTML = `${item.rarity} ${item.slot} ${item.type}`;
+            inv.appendChild(i);
+        })
     }
 }

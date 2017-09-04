@@ -46,6 +46,7 @@ export default class Inventory {
                     console.log('equipped ' + item);
                     event.target.remove();
                     game.player.updateInfobar();
+                    game.player.updateInventory();
                     console.log(game.player.loot);
                     return console.log(game.player.gear);
 

@@ -7,9 +7,7 @@ import {game} from "./index";
 export default class Player {
     constructor() {
         this.loot = [];          // <-- this is the general loot stash
-        this.gold = 0;
-        this.x = 0;
-        this.y = 0;
+        this.x = this.y = this.gold = 0;
         this.stats = {
             str: 25,
             vit: 25,

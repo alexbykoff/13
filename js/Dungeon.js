@@ -134,7 +134,7 @@ export default class Dungeon {
         play(fx.hit);
         if (this.playerTurn) {
             this.playerTurn = false;
-            let damage = Math.floor(player.stats.damage * player.stats.str / 15);
+            let damage = Math.floor(player.stats.damage * player.stats.str / 17);
             damage = rndInt(damage - damage / 5, damage + damage / 5);
             const crit = player.stats.agi >= (player.stats.str + player.stats.damage) ? 2 : 1;
             damage *= crit;

@@ -21,18 +21,18 @@ export default class Loot {
     }
 
     rollItem() {
-        const roll = rndInt(0, 100);
+        const roll = rndInt(0, 101);
         if (roll <= 10) {
             this.type = "coins";
-            this.price = Math.floor(rndInt(10, 25) * 0.75);
+            this.price = rndInt(10, 25);
             game.player.gold += this.price;
             game.player.updateInfobar();
         }
         else {
-            const secondRoll = rndInt(0, 100);
+            const secondRoll = rndInt(0, 101);
             if (secondRoll <= 65) {
                 this.type = "armor";
-                const thirdRoll = rndInt(0, 100);
+                const thirdRoll = rndInt(0, 101);
                 if (thirdRoll <= 25) {
                     this.slot = "head";
                 }
@@ -45,12 +45,12 @@ export default class Loot {
                 else {
                     this.slot = "leg";
                 }
-                this.price = Math.floor(rndInt(15, 40) * 0.75);
+                this.price = rndInt(15, 40);
             }
             else {
                 this.type = "weapon";
                 this.slot = "one-hand";
-                this.price = Math.floor(rndInt(55, 125) * 0.75);
+                this.price = rndInt(55, 125);
             }
             this.rollRarity();
             if (this.slot === "one-hand") this.rollWeaponStats();
@@ -103,13 +103,13 @@ export default class Loot {
     }
 
     static rollStat() {
-        return Math.floor(rndInt(3, 35) * .65);
+        return rndInt(1, 25);
     }
 
     rollWeaponStats() {
         return Object.assign(this.stats,
             {
-                damage: Math.floor(rndInt(3, 65) * .45)
+                damage: rndInt(1, 35)
             });
     }
 

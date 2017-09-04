@@ -3,34 +3,33 @@ import {game} from "./index";
 
 export default class Inventory {
     constructor() {
-        this.slots = 30;
-        this.visible = false;
+        this.vis = false;
     }
 
     toggle() {
-        if (this.visible) {
-            this.visible = false;
+        if (this.vis) {
+            this.vis = false;
             document.body.removeChild($(".inventory"));
             return;
         }
         const inv = C();
         inv.className = "inventory";
 
-        game.player.loot.forEach((item, index) => {
-            const image = require(`../images/${item.slot}.png`);
+        game.player.loot.forEach(i => {
+            const image = require(`../images/${i.slot}.png`);
             const e = C();
-            e.setAttribute("data-id", item.id);
+            e.setAttribute("data-id", i.id);
             e.className = "inventory-object";
             e.style.backgroundImage = `url("${image}")`;
-            e.style.borderStyle = item.rarity === "common" ? "none" : item.rarity === "rare" ? "dashed" : "solid";
+            e.style.borderStyle = i.rarity === "common" ? "none" : i.rarity === "rare" ? "dashed" : "solid";
             inv.appendChild(e);
             // show tooltip
-            const name = item.name ? `<div class="t-name">${item.name}</div>` : "";
+            const name = i.name ? `<div class="t-name">${i.name}</div>` : "";
             let stats = "";
-            Object.keys(item.stats).map(s => {
-                stats += `<div class="t-stat">${s}: ${item.stats[s]}</div>`
+            Object.keys(i.stats).map(s => {
+                stats += `<div class="t-stat">${s}: ${i.stats[s]}</div>`
             });
-            const tooltip = name + `<div class="t-desc">${item.rarity} ${item.slot} ${item.type}</div>${stats}`;
+            const tooltip = name + `<div class="t-desc">${i.rarity} ${i.slot} ${i.type}</div>${stats}`;
             e.addEventListener("mouseenter", () => {
                 const t = C();
                 t.className = "inventory-tooltip";
@@ -38,16 +37,14 @@ export default class Inventory {
                 e.appendChild(t);
             });
             e.addEventListener("dblclick", (event) => {
-                if (game.player.gear[item.slot]) {
-                    game.player.gold +=game.player.gear[item.slot].price;
+                if (game.player.gear[i.slot]) {
+                    game.player.gold +=game.player.gear[i.slot].price;
                 }
-                    game.player.gear[item.slot] = item;
-                    game.player.loot.splice(game.player.loot.findIndex(i => i.id === item.id), 1);
-                    console.log('equipped ' + item);
+                    game.player.gear[i.slot] = i;
+                    game.player.loot.splice(game.player.loot.findIndex(i => i.id === i.id), 1);
                     event.target.remove();
                     game.player.updateInfobar();
-                    console.log(game.player.loot);
-                    return console.log(game.player.gear);
+                    return
 
             });
             // hide tooltip
@@ -56,6 +53,6 @@ export default class Inventory {
             });
         });
         document.body.appendChild(inv);
-        this.visible = true;
+        this.vis = true;
     }
 }

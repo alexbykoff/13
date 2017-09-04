@@ -10,7 +10,7 @@ export default class Dungeon {
         this.exit = {};          // exit coordinates and its state
         this.chunks = [];        // chunks of space to interconnect
         this.canMove = true;
-        this.battleLogger = null;
+        this.logger = null;
         this.turnCount = 0;
     }
 
@@ -126,7 +126,7 @@ export default class Dungeon {
         battle.className = "battle";
         battle.innerHTML = `A foul <i>${enemy.name}</i> with ${enemy.hp} health stands before you!`;
         document.body.appendChild(battle);
-        this.battleLogger = setInterval(() => this.performTurn(enemy, player, onWin), 1200);
+        this.logger = setInterval(() => this.performTurn(enemy, player, onWin), 1200);
     }
 
     performTurn(enemy, player, onWin) {
@@ -173,7 +173,7 @@ export default class Dungeon {
     endBattle(onWin) {
         this.turnCount = 0;
         this.player.hp = this.player.maxHp;
-        clearInterval(this.battleLogger);
+        clearInterval(this.logger);
         setTimeout(() => {
             document.body.removeChild($('.battle'));
             this.canMove = true;

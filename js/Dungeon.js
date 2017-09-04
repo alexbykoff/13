@@ -69,8 +69,8 @@ export default class Dungeon {
     generateChunks() {
 
         /* minimal side length of a chunk is 3 cells */
-        let w = Math.floor(Math.random() * 4) + 3;
-        let h = Math.floor(Math.random() * 4) + 3;
+        let w = rndInt(3, 7);
+        let h = rndInt(3, 7);
 
         /* chunks of cells must have an odd width and height to get the proper center */
         if (!(w % 2)) w += 1;

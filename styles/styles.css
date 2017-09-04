@@ -27,15 +27,15 @@ body, html {
     text-align: center;
 }
 
-.widget {
+.w {
     margin-bottom: 1rem;
 }
 
-.widget-text {
+.w-text {
     font-size: 3rem;
 }
 
-.widget-text.small {
+.w-text.small {
     font-size: 1.25rem;
 }
 
@@ -74,7 +74,7 @@ body, html {
     height: 32px;
     line-height: 1rem;
     font-size: .5rem;
-    background: #555 url("../images/brickwall.png");
+    background: #555 url("../images/w.png");
 }
 
 .free {
@@ -90,7 +90,7 @@ body, html {
 }
 
 .item {
-    background: url("../images/treasure.png");
+    background: url("../images/t.png");
 }
 
 .enemy {

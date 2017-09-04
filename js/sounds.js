@@ -1,10 +1,10 @@
 import "./jsfxr.min";
 
-const audio = new Audio();
+const a = new Audio();
 
 export function play(s) {
-    audio.src = jsfxr(s);
-    audio.play();
+    a.src = jsfxr(s);
+    a.play();
 }
 
 const fx = {

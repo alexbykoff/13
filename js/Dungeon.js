@@ -139,13 +139,13 @@ export default class Dungeon {
             damage *= crit;
             enemy.hp -= damage;
             if (enemy.hp <= 0) {
-                log.innerHTML = `<i>${enemy.name}</i> dies as you deliver a massive blow of ${damage} damage!`;
+                log.innerHTML = `<i>${enemy.name}</i> dies as you deliver a massive blow of ${damage}hp!`;
                 $(".battle").appendChild(log);
                 play(fx.victorySound);
                 this.endBattle(onWin);
             } else {
                 play(fx.hitSound);
-                log.innerHTML = `You hit <i>${enemy.name}</i>: ${damage} damage!`;
+                log.innerHTML = `You hit <i>${enemy.name}</i>: -${damage}hp`;
                 $(".battle").appendChild(log);
             }
         } else {
@@ -153,16 +153,16 @@ export default class Dungeon {
             this.turnCount++;
             this.playerTurn = true;
             let damage = enemy.damage + this.turnCount * 2;
-            let enrage = "";
+            let e = "";
             if (this.turnCount >= 7) {
                 damage *= 2;
-                enrage = "Enraged "
+                e = "Enraged "
             }
             player.hp -= damage;
-            log.innerHTML = `<i>${enrage + enemy.name}</i> hits you: ${damage} damage`;
+            log.innerHTML = `<i>${e + enemy.name}</i> hits you: -${damage}hp`;
             if (player.hp < 0) {
                 player.hp = 0;
-                log.innerHTML += `\nYou died!`
+                log.innerHTML += `\nYou died!`;
                 $(".battle").appendChild(log);
                 return this.endBattle();
             }

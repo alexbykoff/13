@@ -9,12 +9,10 @@ export default class Inventory {
     toggle() {
         if (this.vis) {
             this.vis = false;
-            document.body.removeChild($(".inventory"));
-            return;
+            return document.body.removeChild($(".inventory"));
         }
         const inv = C();
         inv.className = "inventory";
-
         game.player.loot.forEach(i => {
             const image = require(`../images/${i.slot}.png`);
             const e = C();
@@ -43,9 +41,7 @@ export default class Inventory {
                     game.player.gear[i.slot] = i;
                     game.player.loot.splice(game.player.loot.findIndex(i => i.id === i.id), 1);
                     event.target.remove();
-                    game.player.updateInfobar();
-                    return
-
+                    return game.player.updateInfobar();
             });
             // hide tooltip
             e.addEventListener("mouseleave", () => {

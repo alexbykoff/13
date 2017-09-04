@@ -18,6 +18,7 @@ export default class Player {
             damage: 25
         };
         this.hp = this.stats.vit * 10;
+        this.maxHp = this.hp;
         this.gear = {};         // player armor doll
         this.updateInfobar();
     }
@@ -62,6 +63,8 @@ export default class Player {
                 this.stats[stat] += this.gear[item].stats[stat] || 0;
             })
         });
+        this.maxHp = this.stats.vit * 10;
+        this.hp = this.maxHp;
         const gold = $('#gold');
         gold.innerHTML = this.gold;
         Object.keys(this.stats).forEach(s => $(`#${s}`).innerHTML = `${s}: ${this.stats[s]}`);

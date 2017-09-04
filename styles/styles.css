@@ -131,6 +131,11 @@ body, html {
     font-size: .9rem;
 }
 
+.battle span {
+    font-weight: bolder;
+    color: #fff;
+}
+
 .battle,
 .inventory {
     position: absolute;

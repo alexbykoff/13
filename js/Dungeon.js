@@ -11,6 +11,7 @@ export default class Dungeon {
         this.chunks = [];        // chunks of space to interconnect
         this.canMove = true;
         this.battleLogger = null;
+        this.turnCount = 0;
     }
 
     initialize() {
@@ -123,7 +124,7 @@ export default class Dungeon {
         const battle = C();
         this.playerTurn = true;
         battle.className = "battle";
-        battle.innerHTML = `A foul ${enemy.name} with ${enemy.hp} health stands before you!`;
+        battle.innerHTML = `A foul <span>${enemy.name}</span> with ${enemy.hp} health stands before you!`;
         document.body.appendChild(battle);
         this.battleLogger = setInterval(() => this.performTurn(enemy, player, onWin), 1200);
     }
@@ -138,24 +139,40 @@ export default class Dungeon {
             damage *= crit;
             enemy.hp -= damage;
             if (enemy.hp <= 0) {
-                log.innerHTML = `${enemy.name} dies as you deliver a massive blow of ${damage} damage!`;
+                log.innerHTML = `<span>${enemy.name}</span> dies as you deliver a massive blow of ${damage} damage!`;
                 $(".battle").appendChild(log);
                 play(fx.victorySound);
                 this.endBattle(onWin);
             } else {
                 play(fx.hitSound);
-                log.innerHTML = `You hit ${enemy.name} for ${damage} damage!`;
+                log.innerHTML = `You hit <span>${enemy.name}</span>: ${damage} damage!`;
                 $(".battle").appendChild(log);
             }
         } else {
-            this.playerTurn = true;
-            log.innerHTML = `${enemy.name} hits your for some damage.`;
-            $(".battle").appendChild(log);
             play(fx.hitSound);
+            this.turnCount++;
+            this.playerTurn = true;
+            let damage = enemy.damage + this.turnCount * 2;
+            let enrage = "";
+            if (this.turnCount >= 7) {
+                damage *= 2;
+                enrage = "Enraged "
+            }
+            player.hp -= damage;
+            log.innerHTML = `<span>${enrage + enemy.name}</span> hits you: ${damage} damage`;
+            if (player.hp < 0) {
+                player.hp = 0;
+                log.innerHTML += `\nYou died!`
+                $(".battle").appendChild(log);
+                return this.endBattle();
+            }
+            $(".battle").appendChild(log);
         }
     }
 
     endBattle(onWin) {
+        this.turnCount = 0;
+        this.player.hp = this.player.maxHp;
         clearInterval(this.battleLogger);
         setTimeout(() => {
             document.body.removeChild($('.battle'));

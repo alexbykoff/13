@@ -9,7 +9,6 @@ export default class Dungeon {
         this.cells = 0;          // minimal amount of free cells you can move within
         this.exit = {};          // exit coordinates and its state
         this.chunks = [];        // chunks of space to interconnect
-        this.actionHistory = []; // action text holder
         this.canMove = true;
         this.battleLogger = null;
     }
@@ -57,8 +56,8 @@ export default class Dungeon {
                 }
             }
         for (let r = 0; r < this.chunks.length - 1; r++) {
-            Dungeon.buildHorizontalTunnel(this.chunks[r].cx, this.chunks[r + 1].cx, this.chunks[r].cy);
-            Dungeon.buildVerticalTunnel(this.chunks[r].cy, this.chunks[r + 1].cy, this.chunks[r + 1].cx);
+            Dungeon.HT(this.chunks[r].cx, this.chunks[r + 1].cx, this.chunks[r].cy);
+            Dungeon.VT(this.chunks[r].cy, this.chunks[r + 1].cy, this.chunks[r + 1].cx);
         }
 
         this.cells = document.querySelectorAll(".free").length;
@@ -89,7 +88,7 @@ export default class Dungeon {
         this.chunks.push({cx: x + Math.floor(w / 2), cy: y + Math.floor(h / 2)});
     };
 
-    static buildHorizontalTunnel(x1, x2, y) {
+    static HT(x1, x2, y) {  // Horizontal tunnel
         let fromX = Math.min(x1, x2);
         let toX = Math.max(x1, x2);
         for (let x = fromX; x <= toX; x++) {
@@ -97,7 +96,7 @@ export default class Dungeon {
         }
     };
 
-    static buildVerticalTunnel(y1, y2, x) {
+    static VT(y1, y2, x) {  // Vertical tunnel
         let fromY = Math.min(y1, y2);
         let toY = Math.max(y1, y2);
         for (let y = fromY; y <= toY; y++) {
@@ -124,9 +123,9 @@ export default class Dungeon {
         const battle = C();
         this.playerTurn = true;
         battle.className = "battle";
-        battle.innerHTML = `A foul ${enemy.name} stands before you!`;
+        battle.innerHTML = `A foul ${enemy.name} with ${enemy.hp} health stands before you!`;
         document.body.appendChild(battle);
-        this.battleLogger = setInterval(() => this.performTurn(enemy, player, onWin), 1500);
+        this.battleLogger = setInterval(() => this.performTurn(enemy, player, onWin), 1200);
     }
 
     performTurn(enemy, player, onWin) {
@@ -139,18 +138,18 @@ export default class Dungeon {
             damage *= crit;
             enemy.hp -= damage;
             if (enemy.hp <= 0) {
-                log.innerHTML = `Enemy dies as you deliver a massive blow of ${damage} damage!`;
+                log.innerHTML = `${enemy.name} dies as you deliver a massive blow of ${damage} damage!`;
                 $(".battle").appendChild(log);
                 play(fx.victorySound);
                 this.endBattle(onWin);
             } else {
                 play(fx.hitSound);
-                log.innerHTML = `You hit enemy for ${damage} damage!`;
+                log.innerHTML = `You hit ${enemy.name} for ${damage} damage!`;
                 $(".battle").appendChild(log);
             }
         } else {
             this.playerTurn = true;
-            log.innerHTML = `Enemy hits your for some damage.`;
+            log.innerHTML = `${enemy.name} hits your for some damage.`;
             $(".battle").appendChild(log);
             play(fx.hitSound);
         }

@@ -7,9 +7,7 @@ import {game} from "./index";
 export default class Player {
     constructor() {
         this.loot = [];          // <-- this is the general loot stash
-        this.level = 1;
         this.gold = 0;
-        this.exp = 0;
         this.x = 0;
         this.y = 0;
         this.stats = {
@@ -19,7 +17,7 @@ export default class Player {
             per: 25,
             damage: 25
         };
-        this.hp = this.stats.vit * 11;
+        this.hp = this.stats.vit * 10;
         this.gear = {};         // player armor doll
         this.updateInfobar();
     }
@@ -49,7 +47,6 @@ export default class Player {
             game.startBattle(enemy, player, () => {
                 newPosition.classList = "cell item";
             });
-
         }
     }
 

@@ -1,11 +1,12 @@
 import Dungeon from "./Dungeon";
 import Inventory from "./Inventory";
+import fx, {play} from "./sounds";
 
 export const game = new Dungeon(20);
 game.initialize();
 game.buildNewRoom(120);
 game.populateRoom();
-//play(fx.introSound);
+play(fx.introSound);
 const inventory = new Inventory();
 
 document.onkeyup = e => {

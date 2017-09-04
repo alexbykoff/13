@@ -14,7 +14,6 @@ export default class Loot {
         this.rollItem();           // item generating method
         const msg = `${this.name} ${this.rarity} ${this.slot} ${this.type}`;
         console.log(msg);
-        console.log(`Now you have ${game.player.gold} gold`);
         this.toastLoot(msg);
     }
 
@@ -26,7 +25,7 @@ export default class Loot {
         const roll = rollDice();
         if (roll <= 10) {
             this.type = "coins";
-            this.price = Math.floor(rndInt(10, 25) * game.player.level * 0.75);
+            this.price = Math.floor(rndInt(10, 25) * 0.75);
             game.player.gold += this.price;
             game.player.updateInfobar();
         }
@@ -47,16 +46,17 @@ export default class Loot {
                 else {
                     this.slot = "leg";
                 }
-                this.price = Math.floor(rndInt(15, 40) * game.player.level * 0.75);
+                this.price = Math.floor(rndInt(15, 40) * 0.75);
             }
             else {
                 this.type = "weapon";
                 this.slot = "one-hand";
-                this.price = Math.floor(rndInt(55, 125) * game.player.level * 0.75);
+                this.price = Math.floor(rndInt(55, 125) * 0.75);
             }
             this.rollRarity();
             if (this.slot === "one-hand") this.rollWeaponStats();
             else this.rollItemStats();
+            this.alterStatsToQuality();
             game.player.loot.push(this);
         }
 
@@ -86,16 +86,16 @@ export default class Loot {
         };
         switch (this.slot) {
             case "head":
-                stats.per = Math.floor(stats.per * 1.25);
+                stats.per = Math.floor(stats.per * 1.5);
                 break;
             case "chest":
-                stats.vit = Math.floor(stats.vit * 1.25);
+                stats.vit = Math.floor(stats.vit * 1.5);
                 break;
             case "hand":
-                stats.str = Math.floor(stats.str * 1.25);
+                stats.str = Math.floor(stats.str * 1.5);
                 break;
             case "leg":
-                stats.agi = Math.floor(stats.agi * 1.25);
+                stats.agi = Math.floor(stats.agi * 1.5);
                 break;
             default:
                 break;
@@ -104,15 +104,21 @@ export default class Loot {
     }
 
     static rollStat() {
-        return Math.floor(rndInt(10, 16) * game.player.level * .65);
+        return Math.floor(rndInt(3, 35) * .65);
     }
 
     rollWeaponStats() {
         return Object.assign(this.stats,
             {
-                damage: Math.floor(rndInt(20, 30) * game.player.level * .45)
+                damage: Math.floor(rndInt(3, 65) * .45)
             });
     }
+
+    alterStatsToQuality(){
+        Object.keys(this.stats).forEach(s => this.rarity === "rare"
+            ? this.stats[s] = Math.floor(this.stats[s] * 1.5)
+            : this.rarity === "legendary" ? this.stats[s] *= 2 : null);
+    };
 
     toastLoot(msg) {
         const toast = C();

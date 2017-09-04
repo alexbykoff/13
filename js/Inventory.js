@@ -38,7 +38,9 @@ export default class Inventory {
                 e.appendChild(t);
             });
             e.addEventListener("dblclick", (event) => {
-                if (!game.player.gear[item.slot]) {
+                if (game.player.gear[item.slot]) {
+                    game.player.gold +=game.player.gear[item.slot].price;
+                }
                     game.player.gear[item.slot] = item;
                     game.player.loot.splice(game.player.loot.findIndex(i => i.id === item.id), 1);
                     console.log('equipped ' + item);
@@ -46,9 +48,7 @@ export default class Inventory {
                     game.player.updateInfobar();
                     console.log(game.player.loot);
                     return console.log(game.player.gear);
-                }
-                console.log('slot is equipped. todo replace in inventory');
-                return console.log(game.player.gear);
+
             });
             // hide tooltip
             e.addEventListener("mouseleave", () => {

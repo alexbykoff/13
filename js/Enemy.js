@@ -8,6 +8,6 @@ export default class Enemy {
         this.vit = Math.floor(rndInt(10, 16) * .65);
         this.agi = Math.floor(rndInt(10, 16) * .65);
         this.per = Math.floor(rndInt(10, 16) * .65);
-        this.hp = this.vit * 16;
+        this.hp = this.vit * 25;
     }
 }

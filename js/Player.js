@@ -22,34 +22,34 @@ export default class Player {
     }
 
     movePlayerTo(x, y) {
-        const newPosition = $(`#c${x}-${y}`);
-        const oldPosition = $(`#c${this.x}-${this.y}`);
+        const n = $(`#c${x}-${y}`);
+        const o = $(`#c${this.x}-${this.y}`);
 
-        if ([...newPosition.classList].indexOf("free") >= 0) {
-            oldPosition.className = "free cell";
-            newPosition.className = "player cell";
+        if ([...n.classList].indexOf("free") >= 0) {
+            o.className = "free cell";
+            n.className = "player cell";
             updateNeighbours(x, y);
-            this.updatePlayerPosition(x, y);
+            this.newPos(x, y);
         }
-        else if ([...newPosition.classList].indexOf("item") >= 0) {
-            oldPosition.className = "free cell";
-            newPosition.className = "player cell";
+        else if ([...n.classList].indexOf("item") >= 0) {
+            o.className = "free cell";
+            n.className = "player cell";
             updateNeighbours(x, y);
-            this.updatePlayerPosition(x, y);
+            this.newPos(x, y);
             new Loot();
             console.log(this.loot);
             play(fx.coinSound);
         }
-        else if ([...newPosition.classList].indexOf("enemy") >= 0) {
+        else if ([...n.classList].indexOf("enemy") >= 0) {
             const enemy = new Enemy();
             const player = this;
             game.startBattle(enemy, player, () => {
-                newPosition.classList = "cell item";
+                n.classList = "cell item";
             });
         }
     }
 
-    updatePlayerPosition(x, y) {
+    newPos(x, y) {
         this.x = x;
         this.y = y;
     }
@@ -61,10 +61,8 @@ export default class Player {
                 this.stats[stat] += this.gear[item].stats[stat] || 0;
             })
         });
-        this.maxHp = this.stats.vit * 10;
-        this.hp = this.maxHp;
-        const gold = $('#gold');
-        gold.innerHTML = this.gold;
+        this.hp = this.maxHp = this.stats.vit * 10;
+        $('#gold').innerHTML = this.gold;
         Object.keys(this.stats).forEach(s => $(`#${s}`).innerHTML = `${s}: ${this.stats[s]}`);
     }
 }

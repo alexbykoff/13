@@ -126,7 +126,7 @@ export default class Dungeon {
         battle.className = "battle";
         battle.innerHTML = `A foul <i>${enemy.name}</i> with ${enemy.hp} health stands before you!`;
         document.body.appendChild(battle);
-        this.logger = setInterval(() => this.performTurn(enemy, player, onWin), 1200);
+        this.logger = setInterval(() => this.performTurn(enemy, player, onWin), 1000);
     }
 
     performTurn(enemy, player, onWin) {
@@ -139,7 +139,7 @@ export default class Dungeon {
             damage *= crit;
             enemy.hp -= damage;
             if (enemy.hp <= 0) {
-                log.innerHTML = `<i>${enemy.name}</i> dies as you deliver a massive blow of ${damage}hp!`;
+                log.innerHTML = `<i>You finish ${enemy.name}</i> with ${damage}hp hit!`;
                 $(".battle").appendChild(log);
                 play(fx.victorySound);
                 this.endBattle(onWin);

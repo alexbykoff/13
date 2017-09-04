@@ -124,13 +124,14 @@ export default class Dungeon {
         const battle = C();
         this.playerTurn = true;
         battle.className = "battle";
-        battle.innerHTML = `A foul <i>${enemy.name}</i> with ${enemy.hp} health stands before you!`;
+        battle.innerHTML = `A foul <i>${enemy.name}</i> with ${enemy.hp}hp stands before you!`;
         document.body.appendChild(battle);
         this.logger = setInterval(() => this.performTurn(enemy, player, onWin), 1000);
     }
 
     performTurn(enemy, player, onWin) {
         const log = C();
+        play(fx.hit);
         if (this.playerTurn) {
             this.playerTurn = false;
             let damage = Math.floor(player.stats.damage * player.stats.str / 15);
@@ -139,17 +140,16 @@ export default class Dungeon {
             damage *= crit;
             enemy.hp -= damage;
             if (enemy.hp <= 0) {
-                log.innerHTML = `<i>You finish ${enemy.name}</i> with ${damage}hp hit!`;
+                log.innerHTML = `You finish <i>${enemy.name}</i> with ${damage}hp hit!`;
                 $(".battle").appendChild(log);
-                play(fx.victorySound);
+                play(fx.victory);
                 this.endBattle(onWin);
             } else {
-                play(fx.hitSound);
+                play(fx.hit);
                 log.innerHTML = `You hit <i>${enemy.name}</i>: -${damage}hp`;
                 $(".battle").appendChild(log);
             }
         } else {
-            play(fx.hitSound);
             this.turnCount++;
             this.playerTurn = true;
             let damage = enemy.damage + this.turnCount * 2;

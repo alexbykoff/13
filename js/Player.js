@@ -7,9 +7,7 @@ import {game} from "./index";
 export default class Player {
     constructor() {
         this.loot = [];          // <-- this is the general loot stash
-        this.level = 1;
         this.gold = 0;
-        this.exp = 0;
         this.x = 0;
         this.y = 0;
         this.stats = {
@@ -19,7 +17,8 @@ export default class Player {
             per: 25,
             damage: 25
         };
-        this.hp = this.stats.vit * 11;
+        this.hp = this.stats.vit * 10;
+        this.maxHp = this.hp;
         this.gear = {};         // player armor doll
         this.updateInfobar();
     }
@@ -46,11 +45,9 @@ export default class Player {
         else if ([...newPosition.classList].indexOf("enemy") >= 0) {
             const enemy = new Enemy();
             const player = this;
-            const onWin = () => {
-              newPosition.classList = "cell item";
-            }
-            game.startBattle(enemy, player, onWin);
-
+            game.startBattle(enemy, player, () => {
+                newPosition.classList = "cell item";
+            });
         }
     }
 
@@ -66,9 +63,9 @@ export default class Player {
                 this.stats[stat] += this.gear[item].stats[stat] || 0;
             })
         });
-        const level = $('#level');
+        this.maxHp = this.stats.vit * 10;
+        this.hp = this.maxHp;
         const gold = $('#gold');
-        level.innerHTML = this.level;
         gold.innerHTML = this.gold;
         Object.keys(this.stats).forEach(s => $(`#${s}`).innerHTML = `${s}: ${this.stats[s]}`);
     }

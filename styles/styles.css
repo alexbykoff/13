@@ -1,5 +1,5 @@
 * {
-  box-sizing: border-box;
+    box-sizing: border-box;
 }
 
 body, html {
@@ -33,7 +33,7 @@ body, html {
 }
 
 .widget-text {
-  font-size: 3rem;
+    font-size: 3rem;
 }
 
 .widget-text.small {
@@ -58,7 +58,6 @@ body, html {
 .item.fade {
     background: none;
 }
-
 
 .holder {
     width: 640px;
@@ -102,6 +101,7 @@ body, html {
 .item {
     background: url("../images/treasure.png");
 }
+
 .enemy {
     background: url("../images/skeleton.png");
 }
@@ -127,7 +127,13 @@ body, html {
 }
 
 .battle {
-  color: #d27105;
+    color: #d27105;
+    font-size: .9rem;
+}
+
+.battle span {
+    font-weight: bolder;
+    color: #fff;
 }
 
 .battle,

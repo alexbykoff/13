@@ -1,5 +1,6 @@
 import {$, C, rndInt, updateNeighbours, cellIsFree} from './helpers';
 import Player from "./Player";
+import fx, {play} from "./sounds";
 
 export default class Dungeon {
     constructor(side) {
@@ -8,9 +9,9 @@ export default class Dungeon {
         this.cells = 0;          // minimal amount of free cells you can move within
         this.exit = {};          // exit coordinates and its state
         this.chunks = [];        // chunks of space to interconnect
-        this.actionHistory = []; // action text holder
         this.canMove = true;
-        this.battleLogger;
+        this.battleLogger = null;
+        this.turnCount = 0;
     }
 
     initialize() {
@@ -56,8 +57,8 @@ export default class Dungeon {
                 }
             }
         for (let r = 0; r < this.chunks.length - 1; r++) {
-            Dungeon.buildHorizontalTunnel(this.chunks[r].cx, this.chunks[r + 1].cx, this.chunks[r].cy);
-            Dungeon.buildVerticalTunnel(this.chunks[r].cy, this.chunks[r + 1].cy, this.chunks[r + 1].cx);
+            Dungeon.HT(this.chunks[r].cx, this.chunks[r + 1].cx, this.chunks[r].cy);
+            Dungeon.VT(this.chunks[r].cy, this.chunks[r + 1].cy, this.chunks[r + 1].cx);
         }
 
         this.cells = document.querySelectorAll(".free").length;
@@ -88,7 +89,7 @@ export default class Dungeon {
         this.chunks.push({cx: x + Math.floor(w / 2), cy: y + Math.floor(h / 2)});
     };
 
-    static buildHorizontalTunnel(x1, x2, y) {
+    static HT(x1, x2, y) {  // Horizontal tunnel
         let fromX = Math.min(x1, x2);
         let toX = Math.max(x1, x2);
         for (let x = fromX; x <= toX; x++) {
@@ -96,7 +97,7 @@ export default class Dungeon {
         }
     };
 
-    static buildVerticalTunnel(y1, y2, x) {
+    static VT(y1, y2, x) {  // Vertical tunnel
         let fromY = Math.min(y1, y2);
         let toY = Math.max(y1, y2);
         for (let y = fromY; y <= toY; y++) {
@@ -105,13 +106,13 @@ export default class Dungeon {
     };
 
     populateRoom() {
-        let itemNumber = Math.floor(this.cells / 20);
+        let itemNumber = Math.floor(this.cells / 14);
         while (itemNumber) {
             const x = rndInt(2, this.side - 2);
             const y = rndInt(2, this.side - 2);
             if (cellIsFree(x, y)) {
                 const cell = $(`#c${x}-${y}`);
-                Math.random() <= 0.75 ? cell.classList.add("item") : cell.classList.add("enemy");
+                cell.classList.add("enemy");
                 cell.classList.remove("free");
                 itemNumber--;
             }
@@ -119,38 +120,64 @@ export default class Dungeon {
     }
 
     startBattle(enemy, player, onWin) {
-        console.log("Battle started");
         this.canMove = false;
-
         const battle = C();
+        this.playerTurn = true;
         battle.className = "battle";
-        battle.innerHTML = `Battle with ${enemy.name}`;
+        battle.innerHTML = `A foul <span>${enemy.name}</span> with ${enemy.hp} health stands before you!`;
         document.body.appendChild(battle);
-
-        this.battleLogger = setInterval(() => this.hitEnemy(enemy, player, onWin), 1500);
+        this.battleLogger = setInterval(() => this.performTurn(enemy, player, onWin), 1200);
     }
 
-    hitEnemy(enemy, player, onWin) {
+    performTurn(enemy, player, onWin) {
         const log = C();
-        if (enemy.hp - player.stats.damage <= 0) {
-            log.innerHTML = `Enemy died.`;
-            $(".battle").appendChild(log);
-            this.endBattle(onWin);
+        if (this.playerTurn) {
+            this.playerTurn = false;
+            let damage = Math.floor(player.stats.damage * player.stats.str / 15);
+            damage = rndInt(damage - damage / 5, damage + damage / 5);
+            const crit = player.stats.agi >= (player.stats.str + player.stats.damage) ? 2 : 1;
+            damage *= crit;
+            enemy.hp -= damage;
+            if (enemy.hp <= 0) {
+                log.innerHTML = `<span>${enemy.name}</span> dies as you deliver a massive blow of ${damage} damage!`;
+                $(".battle").appendChild(log);
+                play(fx.victorySound);
+                this.endBattle(onWin);
+            } else {
+                play(fx.hitSound);
+                log.innerHTML = `You hit <span>${enemy.name}</span>: ${damage} damage!`;
+                $(".battle").appendChild(log);
+            }
         } else {
-            enemy.hp = enemy.hp - player.stats.damage;
-            log.innerHTML = `Enemy has ${enemy.hp} more health points`;
+            play(fx.hitSound);
+            this.turnCount++;
+            this.playerTurn = true;
+            let damage = enemy.damage + this.turnCount * 2;
+            let enrage = "";
+            if (this.turnCount >= 7) {
+                damage *= 2;
+                enrage = "Enraged "
+            }
+            player.hp -= damage;
+            log.innerHTML = `<span>${enrage + enemy.name}</span> hits you: ${damage} damage`;
+            if (player.hp < 0) {
+                player.hp = 0;
+                log.innerHTML += `\nYou died!`
+                $(".battle").appendChild(log);
+                return this.endBattle();
+            }
             $(".battle").appendChild(log);
         }
     }
 
     endBattle(onWin) {
-        console.log("Battle ended");
-        clearInterval(this.battleLogger)
+        this.turnCount = 0;
+        this.player.hp = this.player.maxHp;
+        clearInterval(this.battleLogger);
         setTimeout(() => {
             document.body.removeChild($('.battle'));
             this.canMove = true;
         }, 2000);
-
         onWin();
     }
 

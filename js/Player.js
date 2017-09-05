@@ -1,4 +1,4 @@
-import {$, C, updateNeighbours} from './helpers';
+import {$, updateNeighbours} from './helpers';
 import fx, {play} from "./sounds";
 import Loot from "./Loot";
 import Enemy from "./Enemy";
@@ -17,14 +17,19 @@ export default class Player {
         };
         this.gear = {};         // player armor doll
         this.updateInfobar();
-        this.updateInventory();
     }
 
     movePlayerTo(x, y) {
         const n = $(`#c${x}-${y}`);
         const o = $(`#c${this.x}-${this.y}`);
-
-        if ([...n.classList].indexOf("free") >= 0) {
+        if ([...n.classList].indexOf("finish") >= 0) {
+            game.level++;
+            game.initialize();
+            this.cells = 120;
+            game.buildNewRoom(this.cells);
+            game.populateRoom();
+        }
+        else if ([...n.classList].indexOf("free") >= 0) {
             o.className = "free cell";
             n.className = "player cell";
             updateNeighbours(x, y);
@@ -47,6 +52,7 @@ export default class Player {
                 n.classList = "cell item";
             });
         }
+
     }
 
     updateInfobar() {
@@ -59,30 +65,5 @@ export default class Player {
         this.hp = this.maxHp = this.stats.vit * 10;
         $('#gold').innerHTML = this.gold;
         Object.keys(this.stats).forEach(s => $(`#${s}`).innerHTML = `${s}: ${this.stats[s]}`);
-    }
-
-    updateInventory() {
-        const inv = $('#inventory');
-
-        Object.keys(this.gear).forEach(group => {
-            console.log(this.gear)
-            console.log(group)
-            const heading = `<h4>${group}</h4><div>${this.gear[group].rarity} ${this.gear[group].slot} ${this.gear[group].type}</div>`;
-
-            if ($(`.${group}`)) {
-                $(`.${group}`).innerHTML = heading;
-                Object.keys(this.gear[group].stats).forEach(s => $(`.${group} stats`).innerHTML = `${s}: ${this.gear[group].stats[s]}`);
-            } else {
-                const g = C();
-                g.classList.add(group);
-                g.innerHTML = heading;
-
-                const i = C();
-                i.classList.add("stats");
-                inv.appendChild(g);
-                $(`.${group}`).appendChild(i);
-                Object.keys(this.gear[group].stats).forEach(s => i.innerHTML = `${s}: ${this.gear[group].stats[s]}`);
-            }
-        });
     }
 }

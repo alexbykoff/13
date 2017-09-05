@@ -136,9 +136,10 @@ export default class Dungeon {
             this.playerTurn = false;
             let damage = Math.floor(player.stats.damage * player.stats.str / 17);
             damage = rndInt(damage - damage / 5, damage + damage / 5);
-            const crit = player.stats.agi >= (player.stats.str + player.stats.damage) ? 2 : 1;
+            const crit = player.stats.agi >= (player.stats.str + player.stats.damage / 3 ) ? 2 : 1;
             damage *= crit;
             enemy.hp -= damage;
+            const hit = crit === 2 ? "crit" : "hit";
             if (enemy.hp <= 0) {
                 log.innerHTML = `You finish <i>${enemy.name}</i> with ${damage}hp hit!`;
                 $(".battle").appendChild(log);
@@ -146,7 +147,7 @@ export default class Dungeon {
                 this.endBattle(onWin);
             } else {
                 play(fx.hit);
-                log.innerHTML = `You hit <i>${enemy.name}</i>: -${damage}hp`;
+                log.innerHTML = `You ${hit} <i>${enemy.name}</i>: -${damage}hp`;
                 $(".battle").appendChild(log);
             }
         } else {

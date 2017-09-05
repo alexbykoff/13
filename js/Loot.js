@@ -24,7 +24,7 @@ export default class Loot {
         const roll = rndInt(0, 101);
         if (roll <= 10) {
             this.type = "coins";
-            this.price = rndInt(10, 25);
+            this.price = rndInt(10, 25) + game.level;
             game.player.gold += this.price;
             game.player.updateInfobar();
         }
@@ -45,12 +45,12 @@ export default class Loot {
                 else {
                     this.slot = "leg";
                 }
-                this.price = rndInt(15, 40);
+                this.price = rndInt(15, 40) + game.level;
             }
             else {
                 this.type = "weapon";
                 this.slot = "one-hand";
-                this.price = rndInt(55, 125);
+                this.price = rndInt(55, 125) + game.level;
             }
             this.rollRarity();
             if (this.slot === "one-hand") this.rollWeaponStats();
@@ -103,17 +103,17 @@ export default class Loot {
     }
 
     static rollStat() {
-        return rndInt(1, 25);
+        return rndInt(1, 25) + game.level;
     }
 
     rollWeaponStats() {
         return Object.assign(this.stats,
             {
-                damage: rndInt(1, 35)
+                damage: rndInt(1, 35) + game.level
             });
     }
 
-    alterStat(){
+    alterStat() {
         Object.keys(this.stats).forEach(s => this.rarity === "rare"
             ? this.stats[s] = Math.floor(this.stats[s] * 1.5)
             : this.rarity === "legendary" ? this.stats[s] *= 2 : null);

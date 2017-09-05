@@ -126,7 +126,7 @@ export default class Dungeon {
         battle.className = "battle";
         battle.innerHTML = `A foul <i>${enemy.name}</i> with ${enemy.hp}hp stands before you!`;
         document.body.appendChild(battle);
-        this.logger = setInterval(() => this.performTurn(enemy, player, onWin), 1000);
+        this.logger = setInterval(() => this.performTurn(enemy, player, onWin), 1250);
     }
 
     performTurn(enemy, player, onWin) {

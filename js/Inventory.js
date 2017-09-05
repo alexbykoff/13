@@ -48,7 +48,6 @@ export default class Inventory {
                 game.player.loot.splice(game.player.loot.findIndex(i => i.id === i.id), 1);
                 event.target.remove();
                 game.player.updateInfobar();
-                game.player.updateInventory();
             });
             // hide tooltip
             e.addEventListener("mouseleave", () => {

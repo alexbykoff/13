@@ -25,7 +25,13 @@ export default class Inventory {
             const name = i.name ? `<div class="t-name">${i.name}</div>` : "";
             let stats = "";
             Object.keys(i.stats).map(s => {
-                stats += `<div class="t-stat">${s}: ${i.stats[s]}</div>`
+                stats += `<div class="t-stat">${s}: ${i.stats[s]}`;
+                // Compare loot quality
+                if (game.player.gear[i.slot]) {
+                    stats += `(${i.stats[s] - game.player.gear[i.slot].stats[s]})</div>`;
+                } else {
+                    stats += `</div>`;
+                }
             });
             const tooltip = name + `<div class="t-desc">${i.rarity} ${i.slot} ${i.type}</div>${stats}`;
             e.addEventListener("mouseenter", () => {
@@ -36,13 +42,13 @@ export default class Inventory {
             });
             e.addEventListener("dblclick", (event) => {
                 if (game.player.gear[i.slot]) {
-                    game.player.gold +=game.player.gear[i.slot].price;
+                    game.player.gold += game.player.gear[i.slot].price;
                 }
-                    game.player.gear[i.slot] = i;
-                    game.player.loot.splice(game.player.loot.findIndex(i => i.id === i.id), 1);
-                    event.target.remove();
-                    game.player.updateInfobar();
-                    game.player.updateInventory();
+                game.player.gear[i.slot] = i;
+                game.player.loot.splice(game.player.loot.findIndex(i => i.id === i.id), 1);
+                event.target.remove();
+                game.player.updateInfobar();
+                game.player.updateInventory();
             });
             // hide tooltip
             e.addEventListener("mouseleave", () => {

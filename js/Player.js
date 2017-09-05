@@ -22,8 +22,13 @@ export default class Player {
     movePlayerTo(x, y) {
         const n = $(`#c${x}-${y}`);
         const o = $(`#c${this.x}-${this.y}`);
-
-        if ([...n.classList].indexOf("free") >= 0) {
+        if ([...n.classList].indexOf("finish") >= 0) {
+            game.level++;
+            game.initialize();
+            game.buildNewRoom(120);
+            game.populateRoom();
+        }
+        else if ([...n.classList].indexOf("free") >= 0) {
             o.className = "free cell";
             n.className = "player cell";
             updateNeighbours(x, y);
@@ -46,6 +51,7 @@ export default class Player {
                 n.classList = "cell item";
             });
         }
+
     }
 
     updateInfobar() {

@@ -25,7 +25,8 @@ export default class Player {
         if ([...n.classList].indexOf("finish") >= 0) {
             game.level++;
             game.initialize();
-            game.buildNewRoom(120);
+            this.cells = 120;
+            game.buildNewRoom(this.cells);
             game.populateRoom();
         }
         else if ([...n.classList].indexOf("free") >= 0) {

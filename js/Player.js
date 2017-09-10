@@ -48,7 +48,8 @@ export default class Player {
             play(fx.coinSound);
         }
         else if ([...n.classList].indexOf("enemy") >= 0) {
-            const enemy = new Enemy();
+            const enemyType = n.dataset.enemyType;
+            const enemy = new Enemy(enemyType);
             const player = this;
             game.startBattle(enemy, player, () => { // Win callback
                 n.classList = "cell item";

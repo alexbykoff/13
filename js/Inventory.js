@@ -42,7 +42,6 @@ export default class Inventory {
                 e.appendChild(t);
             });
             e.addEventListener("dblclick", (event) => {
-                console.log(game.player.gear)
                 if (game.player.gear[i.slot]) {
                     game.player.gold += game.player.gear[i.slot].price;
                 }

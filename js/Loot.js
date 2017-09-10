@@ -22,7 +22,7 @@ export default class Loot {
 
     rollItem() {
         const roll = rndInt(0, 101);
-        if (roll <= 10) {
+        if (roll <= 50) {
             this.type = "coins";
             this.price = rndInt(10, 25) + game.player.level;
             game.player.gold += this.price;
@@ -30,7 +30,7 @@ export default class Loot {
         }
         else {
             const secondRoll = rndInt(0, 101);
-            if (secondRoll <= 65) {
+            if (secondRoll <= 75) {
                 this.type = "armor";
                 const thirdRoll = rndInt(0, 101);
                 if (thirdRoll <= 25) {
@@ -63,10 +63,10 @@ export default class Loot {
 
     rollRarity() {
         const roll = rndInt(0, 100);
-        if (roll <= 60) {
+        if (roll <= 75) {
             this.rarity = "common";
         }
-        else if (roll > 60 && roll <= 85) {
+        else if (roll > 75 && roll <= 92) {
             this.rarity = "rare";
             this.name = generateName(2);
         }

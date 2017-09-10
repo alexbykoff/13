@@ -9,13 +9,13 @@ export default class Dungeon {
         this.cells = 0;          // minimal amount of free cells you can move within
         this.exit = {};          // exit coordinates and its state
         this.chunks = [];        // chunks of space to interconnect
-        this.level = 1;
         this.canMove = true;
         this.logger = null;
         this.turnCount = 0;
     }
 
     initialize() {
+        this.chunks = [];
         const holder = $(".holder");
         holder.innerHTML = "";
         for (let i = 0; i < this.side * this.side; i++) {
@@ -65,6 +65,7 @@ export default class Dungeon {
         this.cells = document.querySelectorAll(".free").length;
         this.player.movePlayerTo(this.player.x, this.player.y);
         updateNeighbours(this.player.x, this.player.y);
+        $('#level').innerHTML = `Floor: ${this.player.level}`;
     };
 
     generateChunks() {
@@ -161,9 +162,10 @@ export default class Dungeon {
                 e = "Enraged "
             }
             player.hp -= damage;
+            if (player.hp < 0) player.hp = 0;
+            $('#hp').innerHTML = `Health: ${player.hp}`;
             log.innerHTML = `<i>${e + enemy.name}</i> hits you: -${damage}hp`;
-            if (player.hp < 0) {
-                player.hp = 0;
+            if (player.hp === 0) {
                 log.innerHTML += `\nYou died!`;
                 $(".battle").appendChild(log);
                 return this.endBattle();

@@ -9,7 +9,6 @@ export default class Dungeon {
         this.cells = 0;          // minimal amount of free cells you can move within
         this.exit = {};          // exit coordinates and its state
         this.chunks = [];        // chunks of space to interconnect
-        this.level = 1;
         this.canMove = true;
         this.logger = null;
         this.turnCount = 0;

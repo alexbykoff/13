@@ -8,6 +8,8 @@ export default class Player {
     constructor() {
         this.loot = [];          // <-- this is the general loot stash
         this.x = this.y = this.gold = 0;
+        this.kills = 0;          // Enemy kill count
+        this.level = 1;          // Floor
         this.stats = {
             str: 25,
             vit: 25,
@@ -23,7 +25,7 @@ export default class Player {
         const n = $(`#c${x}-${y}`);
         const o = $(`#c${this.x}-${this.y}`);
         if ([...n.classList].indexOf("finish") >= 0) {
-            game.level++;
+            this.level++;
             game.initialize();
             this.cells = 120;
             game.buildNewRoom(this.cells);
@@ -48,8 +50,9 @@ export default class Player {
         else if ([...n.classList].indexOf("enemy") >= 0) {
             const enemy = new Enemy();
             const player = this;
-            game.startBattle(enemy, player, () => {
+            game.startBattle(enemy, player, () => { // Win callback
                 n.classList = "cell item";
+                this.kills++;
             });
         }
 
@@ -63,7 +66,9 @@ export default class Player {
             })
         });
         this.hp = this.maxHp = this.stats.vit * 10;
-        $('#gold').innerHTML = this.gold;
+        $('#level').innerHTML = `Floor: ${this.level}`;
+        $('#gold').innerHTML = `Gold: ${this.gold}`;
+        $('#kill').innerHTML = `Kills: ${this.gold}`;
         Object.keys(this.stats).forEach(s => $(`#${s}`).innerHTML = `${s}: ${this.stats[s]}`);
     }
 }

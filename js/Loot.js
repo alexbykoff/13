@@ -1,6 +1,7 @@
 import {rndInt, $, C} from "./helpers";
 import {game} from "./index";
 import {generateName} from "./name";
+import Card from "./Card";
 
 export default class Loot {
     constructor() {
@@ -14,6 +15,7 @@ export default class Loot {
         this.rollItem();           // item generating method
         const msg = `${this.name} ${this.rarity} ${this.slot} ${this.type}`;
         this.toastLoot(msg);
+        this.type !== "coins" && this.showCard();
     }
 
     static ID() {
@@ -22,7 +24,7 @@ export default class Loot {
 
     rollItem() {
         const roll = rndInt(0, 101);
-        if (roll <= 10) {
+        if (roll <= 50) {
             this.type = "coins";
             this.price = rndInt(10, 25) + game.player.level;
             game.player.gold += this.price;
@@ -30,7 +32,7 @@ export default class Loot {
         }
         else {
             const secondRoll = rndInt(0, 101);
-            if (secondRoll <= 65) {
+            if (secondRoll <= 75) {
                 this.type = "armor";
                 const thirdRoll = rndInt(0, 101);
                 if (thirdRoll <= 25) {
@@ -63,10 +65,10 @@ export default class Loot {
 
     rollRarity() {
         const roll = rndInt(0, 100);
-        if (roll <= 60) {
+        if (roll <= 75) {
             this.rarity = "common";
         }
-        else if (roll > 60 && roll <= 85) {
+        else if (roll > 75 && roll <= 92) {
             this.rarity = "rare";
             this.name = generateName(2);
         }
@@ -126,5 +128,9 @@ export default class Loot {
         $(".holder").appendChild(toast);
         setTimeout(() => toast.classList.add("lootToaster-fade"), 500);
         setTimeout(() => toast.parentNode.removeChild(toast), 3000);
+    }
+
+    showCard() {
+        console.log(new Card(this));
     }
 }

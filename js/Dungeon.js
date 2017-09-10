@@ -138,8 +138,8 @@ export default class Dungeon {
         const log = C();
         if (this.playerTurn) {
             this.playerTurn = false;
-            let damage = Math.floor(player.stats.damage * player.stats.str / 17);
-            damage = rndInt(damage - damage / 5, damage + damage / 5);
+            let damage = Math.floor(player.stats.damage * player.stats.str / 21);
+            damage = rndInt(damage - damage / 7, damage + damage / 7);
             const crit = player.stats.agi >= (player.stats.str + player.stats.damage / 3 ) ? 2 : 1;
             damage *= crit;
             enemy.hp -= damage;

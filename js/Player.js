@@ -53,6 +53,7 @@ export default class Player {
             game.startBattle(enemy, player, () => { // Win callback
                 n.classList = "cell item";
                 this.kills++;
+                this.updateInfobar();
             });
         }
 
@@ -66,9 +67,9 @@ export default class Player {
             })
         });
         this.hp = this.maxHp = this.stats.vit * 10;
-        $('#level').innerHTML = `Floor: ${this.level}`;
         $('#gold').innerHTML = `Gold: ${this.gold}`;
-        $('#kill').innerHTML = `Kills: ${this.gold}`;
+        $('#kill').innerHTML = `Kills: ${this.kills}`;
+        $('#hp').innerHTML = `Health: ${this.hp}`;
         Object.keys(this.stats).forEach(s => $(`#${s}`).innerHTML = `${s}: ${this.stats[s]}`);
     }
 }

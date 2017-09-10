@@ -65,6 +65,7 @@ export default class Dungeon {
         this.cells = document.querySelectorAll(".free").length;
         this.player.movePlayerTo(this.player.x, this.player.y);
         updateNeighbours(this.player.x, this.player.y);
+        $('#level').innerHTML = `Floor: ${this.player.level}`;
     };
 
     generateChunks() {
@@ -161,9 +162,10 @@ export default class Dungeon {
                 e = "Enraged "
             }
             player.hp -= damage;
+            if (player.hp < 0) player.hp = 0;
+            $('#hp').innerHTML = `Health: ${player.hp}`;
             log.innerHTML = `<i>${e + enemy.name}</i> hits you: -${damage}hp`;
-            if (player.hp < 0) {
-                player.hp = 0;
+            if (player.hp === 0) {
                 log.innerHTML += `\nYou died!`;
                 $(".battle").appendChild(log);
                 return this.endBattle();

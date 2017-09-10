@@ -109,12 +109,15 @@ export default class Dungeon {
 
     populateRoom() {
         let itemNumber = Math.floor(this.cells / 14);
+        const enemies = ["skeleton", "crab", "wrath"];
         while (itemNumber) {
             const x = rndInt(2, this.side - 2);
             const y = rndInt(2, this.side - 2);
+            const enemyType = rndInt(0, 3);
             if (cellIsFree(x, y)) {
                 const cell = $(`#c${x}-${y}`);
                 cell.classList.add("enemy");
+                cell.dataset.enemyType = `${enemies[enemyType]}`;
                 cell.classList.remove("free");
                 itemNumber--;
             }

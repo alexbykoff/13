@@ -94,8 +94,16 @@ body, html {
     background: url("../images/t.png");
 }
 
-.enemy {
+.enemy[data-enemy-type="skeleton"] {
     background: url("../images/skeleton.png");
+}
+
+.enemy[data-enemy-type="crab"] {
+    background: url("../images/crab.png");
+}
+
+.enemy[data-enemy-type="wrath"] {
+    background: url("../images/wrath.png");
 }
 
 .lootToaster {

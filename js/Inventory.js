@@ -17,6 +17,7 @@ export default class Inventory {
             const image = require(`../images/${i.slot}.png`);
             const e = C();
             e.setAttribute("data-id", i.id);
+            e.setAttribute("data-slot", i.slot);
             e.className = "inventory-object";
             e.style.backgroundImage = `url("${image}")`;
             e.style.borderStyle = i.rarity === "common" ? "none" : i.rarity === "rare" ? "dashed" : "solid";
@@ -41,6 +42,7 @@ export default class Inventory {
                 e.appendChild(t);
             });
             e.addEventListener("dblclick", (event) => {
+                console.log(game.player.gear)
                 if (game.player.gear[i.slot]) {
                     game.player.gold += game.player.gear[i.slot].price;
                 }
@@ -49,6 +51,13 @@ export default class Inventory {
                 event.target.remove();
                 game.player.updateInfobar();
                 this.toggle();
+
+                if($(`#inventory [data-slot=${i.slot}]`)) {
+                  $("#inventory").removeChild($(`#inventory [data-slot=${i.slot}]`))
+                  $("#inventory").appendChild(e)
+                } else {
+                  $("#inventory").appendChild(e)
+                }
             });
             // hide tooltip
             e.addEventListener("mouseleave", () => {

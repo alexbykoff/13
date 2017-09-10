@@ -1,6 +1,7 @@
 import {rndInt, $, C} from "./helpers";
 import {game} from "./index";
 import {generateName} from "./name";
+import Card from "./Card";
 
 export default class Loot {
     constructor() {
@@ -14,6 +15,7 @@ export default class Loot {
         this.rollItem();           // item generating method
         const msg = `${this.name} ${this.rarity} ${this.slot} ${this.type}`;
         this.toastLoot(msg);
+        this.type !== "coins" && this.showCard();
     }
 
     static ID() {
@@ -126,5 +128,9 @@ export default class Loot {
         $(".holder").appendChild(toast);
         setTimeout(() => toast.classList.add("lootToaster-fade"), 500);
         setTimeout(() => toast.parentNode.removeChild(toast), 3000);
+    }
+
+    showCard() {
+        console.log(new Card(this));
     }
 }

@@ -16,6 +16,7 @@ export default class Dungeon {
     }
 
     initialize() {
+        this.chunks = [];
         const holder = $(".holder");
         holder.innerHTML = "";
         for (let i = 0; i < this.side * this.side; i++) {

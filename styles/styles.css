@@ -136,8 +136,7 @@ body, html {
 }
 
 .card,
-.battle,
-.inventory {
+.battle {
     position: absolute;
     width: 340px;
     left: calc(50% - 170px);
@@ -145,33 +144,6 @@ body, html {
     padding: 32px 10px;
     background: #000;
     border: 4px solid #d27105;
-}
-
-.inventory-object {
-    position: relative;
-    box-sizing: border-box;
-    width: 32px;
-    height: 32px;
-    border: 2px #d27105;
-    display: inline-block;
-    line-height: 0;
-    margin: 0;
-    padding: 0;
-}
-
-.inventory-tooltip {
-    z-index: 10;
-    position: absolute;
-    top: 1rem;
-    left: 1rem;
-    background-color: #000;
-    border: 3px solid #d27105;
-    border-radius: 4px;
-    line-height: 1;
-    font-size: 0.75rem;
-    padding: 0.5rem;
-    white-space: nowrap;
-    user-select: none;
 }
 
 .t-name {

@@ -16,6 +16,10 @@ body, html {
 
 .container {
     margin: 1rem auto;
+    max-width: 1080px;
+}
+
+.game {
     display: flex;
     justify-content: center;
 }

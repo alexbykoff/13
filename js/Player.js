@@ -67,7 +67,7 @@ export default class Player {
                 this.stats[stat] += this.gear[item].stats[stat] || 0;
             })
         });
-        this.hp = this.maxHp = this.stats.vit * 10;
+        this.hp = this.stats.vit * 9;
         $('#gold').innerHTML = `Gold: ${this.gold}`;
         $('#kill').innerHTML = `Kills: ${this.kills}`;
         $('#hp').innerHTML = `Health: ${this.hp}`;

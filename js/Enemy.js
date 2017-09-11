@@ -4,20 +4,20 @@ import {game} from "./index";
 const types = {
     skeleton: {
         name: "Skeleton",
-        damage: rndInt(25, 40),
-        hp: rndInt(75, 250)
+        damage: rndInt(25, 45),
+        hp: rndInt(75, 260)
     },
     crab: {
         name: "Crab",
-        damage: rndInt(35, 50),
-        hp: rndInt(75, 250)
+        damage: rndInt(40, 58),
+        hp: rndInt(55, 240)
     },
     wrath: {
         name: "Wrath",
-        damage: rndInt(15, 30),
-        hp: rndInt(125, 350)
+        damage: rndInt(22, 35),
+        hp: rndInt(125, 365)
     }
-}
+};
 
 export default class Enemy {
     constructor(type) {
@@ -31,10 +31,10 @@ export default class Enemy {
     }
 
     getDamage(type) {
-        return Math.round(types[type].damage * (1 + game.player.level / 7)) + game.player.level * 2;
+        return Math.round(types[type].damage * (1 + game.player.level / 6)) + game.player.level * 2;
     }
 
     getHp(type) {
-        return Math.round(types[type].hp * (1 + game.player.level / 7)) + game.player.level * 2;
+        return Math.round(types[type].hp * (1 + game.player.level / 6)) + game.player.level * 2;
     }
 }

@@ -13,9 +13,8 @@ export default class Loot {
         this.rarity = "";          // rarity: common, rare, legendary, artifact
         this.stats = {};           // stats that are rolled if isItem
         this.rollItem();           // item generating method
-        const msg = `${this.name} ${this.rarity} ${this.slot} ${this.type}`;
-        this.toastLoot(msg);
-        this.type !== "coins" && this.showCard();
+        const msg = `You picked ${this.price} coins`;
+        this.type !== "coins" ? this.showCard() : this.toastLoot(msg);
     }
 
     static ID() {
@@ -131,7 +130,6 @@ export default class Loot {
     }
 
     showCard() {
-        // console.log(new Card(this));
         const card = new Card(this);
         document.body.appendChild(card);
     }

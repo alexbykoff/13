@@ -63,9 +63,18 @@ export default class Player {
     updateInfobar() {
         Object.keys(this.stats).forEach(stat => {
             this.stats[stat] = 30;
-            Object.keys(this.gear).forEach(item => {
+            this.gear && Object.keys(this.gear).forEach(item => {
                 this.stats[stat] += this.gear[item].stats[stat] || 0;
             })
+        });
+        this.gear && Object.keys(this.gear).forEach(item => {
+            let data = "";
+            this.gear[item].name && (data+=`<div class="sidebar-itemname">${this.gear[item].name}</div>`);
+            Object.keys(this.gear[item].stats).forEach(stat => {
+                data += `<div>${stat}: ${this.gear[item].stats[stat]}</div>`;
+            });
+            $(`#${item}`).innerHTML = data;
+            $(`#${item}`).className =this.gear[item].rarity
         });
         this.hp = this.stats.vit * 9;
         $('#gold').innerHTML = `Gold: ${this.gold}`;

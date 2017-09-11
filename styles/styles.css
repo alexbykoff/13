@@ -195,3 +195,25 @@ body, html {
     color: #d27105;
     font-size: 1.15rem;
 }
+
+.stat-holder {
+    font-size: 0.85rem;
+    text-align: center;
+    white-space: nowrap;
+}
+
+.sidebar h5 {
+    margin: 1rem .25rem .25rem;
+}
+
+.sidebar-itemname {
+    font-weight: bolder;
+}
+
+.rare {
+    border:  dashed 1px #d27105;
+}
+
+.legendary {
+    border:  solid 1px #d27105;
+}

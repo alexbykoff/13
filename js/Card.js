@@ -22,14 +22,20 @@ export default function Card(item) {
     equip.innerHTML = "Equip";
     equip.onclick = () => {
         console.log("equipped")
-        document.body.removeChild($("#card"))
+        game.player.gear[item.slot] = item;
+        console.log(game.player.gear);
+        document.body.removeChild($(".card"));
+        return game.player.gear;
     };
 
     const sell = C();
     sell.className = "card-button";
     sell.onclick = () => {
         console.log("sold")
-        document.body.removeChild($("#card"))
+        game.player.gold += item.price;
+        console.log(game.player.gear);
+        document.body.removeChild($(".card"));
+        return game.player.gear;
     };
 
     sell.innerHTML = "Sell";
@@ -37,5 +43,6 @@ export default function Card(item) {
     card.innerHTML = cardData;
     card.appendChild(equip);
     card.appendChild(sell);
+
     return card;
 };

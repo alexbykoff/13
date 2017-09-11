@@ -132,5 +132,7 @@ export default class Loot {
 
     showCard() {
         console.log(new Card(this));
+        const card = new Card(this);
+        document.body.appendChild(card);
     }
 }

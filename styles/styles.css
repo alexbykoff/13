@@ -134,6 +134,7 @@ body, html {
     color: #fff;
 }
 
+.card,
 .battle,
 .inventory {
     position: absolute;
@@ -194,4 +195,14 @@ body, html {
     text-align: left;
     color: #d27105;
     font-size: 1.15rem;
+}
+
+.card-button {
+    cursor: pointer;
+    display: inline-block;
+    color: #d27105;
+    text-align: center;
+    border: 2px solid #d27105;
+    padding: 0.5rem;
+    margin: 1rem 1rem 0 1rem;
 }

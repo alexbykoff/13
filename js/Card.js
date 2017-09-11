@@ -22,14 +22,14 @@ export default function Card(item) {
     equip.innerHTML = "Equip";
     equip.onclick = () => {
         console.log("equipped")
-        document.body.removeChild($("#card"))
+        document.body.removeChild($(".card"))
     };
 
     const sell = C();
     sell.className = "card-button";
     sell.onclick = () => {
         console.log("sold")
-        document.body.removeChild($("#card"))
+        document.body.removeChild($(".card"))
     };
 
     sell.innerHTML = "Sell";
@@ -37,5 +37,6 @@ export default function Card(item) {
     card.innerHTML = cardData;
     card.appendChild(equip);
     card.appendChild(sell);
+
     return card;
 };

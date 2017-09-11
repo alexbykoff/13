@@ -131,10 +131,6 @@ body, html {
     color: #d27105;
 }
 
-.battle i {
-    color: #fff;
-}
-
 .card,
 .battle {
     position: absolute;
@@ -144,6 +140,7 @@ body, html {
     padding: 32px 10px;
     background: #000;
     border: 4px solid #d27105;
+    box-shadow: 6px 6px #000;
 }
 
 .t-name {

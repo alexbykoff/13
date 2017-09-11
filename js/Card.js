@@ -21,21 +21,19 @@ export default function Card(item) {
     equip.className = "card-button";
     equip.innerHTML = "Equip";
     equip.onclick = () => {
-        console.log("equipped")
         game.player.gear[item.slot] = item;
         console.log(game.player.gear);
         document.body.removeChild($(".card"));
-        return game.player.gear;
+        return game.player.updateInfobar();
     };
 
     const sell = C();
     sell.className = "card-button";
     sell.onclick = () => {
-        console.log("sold")
         game.player.gold += item.price;
         console.log(game.player.gear);
         document.body.removeChild($(".card"));
-        return game.player.gear;
+        return game.player.updateInfobar();
     };
 
     sell.innerHTML = "Sell";

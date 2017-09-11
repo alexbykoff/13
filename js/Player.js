@@ -77,9 +77,12 @@ export default class Player {
             $(`#${item}`).className =this.gear[item].rarity
         });
         this.hp = this.stats.vit * 9;
+        this.score = this.kills * this.level * this.gold;
         $('#gold').innerHTML = `Gold: ${this.gold}`;
         $('#kill').innerHTML = `Kills: ${this.kills}`;
         $('#hp').innerHTML = `Health: ${this.hp}`;
+        $('#score').innerHTML = `Score: ${this.score}`;
+
         Object.keys(this.stats).forEach(s => $(`#${s}`).innerHTML = `${s}: ${this.stats[s]}`);
     }
 }

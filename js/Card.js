@@ -22,7 +22,6 @@ export default function Card(item) {
     equip.innerHTML = "Equip";
     equip.onclick = () => {
         game.player.gear[item.slot] = item;
-        console.log(game.player.gear);
         document.body.removeChild($(".card"));
         return game.player.updateInfobar();
     };
@@ -31,7 +30,6 @@ export default function Card(item) {
     sell.className = "card-button";
     sell.onclick = () => {
         game.player.gold += item.price;
-        console.log(game.player.gear);
         document.body.removeChild($(".card"));
         return game.player.updateInfobar();
     };

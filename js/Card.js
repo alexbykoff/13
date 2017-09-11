@@ -23,8 +23,9 @@ export default function Card(item) {
     equip.onclick = () => {
         console.log("equipped")
         game.player.gear[item.slot] = item;
-        console.log(game.player.gear)
-        document.body.removeChild($(".card"))
+        console.log(game.player.gear);
+        document.body.removeChild($(".card"));
+        return game.player.gear;
     };
 
     const sell = C();
@@ -32,8 +33,9 @@ export default function Card(item) {
     sell.onclick = () => {
         console.log("sold")
         game.player.gold += item.price;
-        console.log(game.player.gear)
-        document.body.removeChild($(".card"))
+        console.log(game.player.gear);
+        document.body.removeChild($(".card"));
+        return game.player.gear;
     };
 
     sell.innerHTML = "Sell";

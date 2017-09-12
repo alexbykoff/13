@@ -15,7 +15,11 @@ Zipped game (with all the assets and deps) must not exceed **13k** bytes.
 
 - clone repo or download zip
 - unzip
-- run `index.html`
+- run `index.html`  
+
+Cursors to move.   
+If you decide to equip a new piece of gear an old one will be replaced and sold.
+
 
 ##### How to develop:
 

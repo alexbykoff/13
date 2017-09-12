@@ -138,7 +138,7 @@ export default class Dungeon {
         const log = C();
         if (this.playerTurn) {
             this.playerTurn = false;
-            let damage = Math.floor(player.stats.damage * player.stats.str / 25) - this.player.level * 3;
+            let damage = Math.floor(player.stats.damage * player.stats.str / 25) - this.player.level * 4;
             damage = rndInt(damage - damage / 5, damage + damage / 5);
             const crit = player.stats.agi >= (player.stats.str + player.stats.damage / 3 ) ? 2 : 1;
             damage *= crit;
@@ -156,7 +156,6 @@ export default class Dungeon {
             }
         } else {
             this.turnCount++;
-            play(fx.hit);
             this.playerTurn = true;
             let damage = enemy.damage + this.turnCount * 2;
             let e = "";
@@ -171,8 +170,10 @@ export default class Dungeon {
             if (player.hp === 0) {
                 log.innerHTML += `\nYou died!`;
                 $(".battle").appendChild(log);
+                play(fx.death);
                 return this.endBattle();
             }
+            play(fx.hit);
             $(".battle").appendChild(log);
         }
     }

@@ -110,26 +110,6 @@ body, html {
     background: url("../images/wrath.png");
 }
 
-.lootToaster {
-    opacity: 1;
-    padding: .5rem;
-    width: 22rem;
-    height: 3rem;
-    text-align: center;
-    color: #d27105;
-    background-color: #000;
-    border: 4px solid #d27105;
-    position: absolute;
-    bottom: -3rem;
-    left: calc(50% - 11rem);
-    line-height: 1;
-    transition: all 2.5s linear;
-}
-
-.lootToaster-fade {
-    opacity: 0;
-}
-
 .battle {
     color: #d27105;
 }

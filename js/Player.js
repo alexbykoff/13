@@ -60,7 +60,6 @@ export default class Player {
                 this.showGameover();
             });
         }
-
     }
 
     updateInfobar() {
@@ -91,7 +90,6 @@ export default class Player {
 
     showGameover() {
         game.canMove = false;
-        console.log('showGameover');
         const g = C();
         g.classList.add('gameover');
         g.innerHTML =
@@ -99,7 +97,6 @@ export default class Player {
 <p>You defeated ${this.kills} foes and ventured down the dungeon level ${this.level}</p>
 <p>Sadly, you perished but your fame and courage will outlive the greatest of the kings.</p>
 `;
-
         const restart = C();
         restart.className = "card-button";
         restart.innerHTML = "Restart";
@@ -108,7 +105,6 @@ export default class Player {
         };
 
         g.appendChild(restart);
-
         $('.holder').appendChild(g);
     }
 }

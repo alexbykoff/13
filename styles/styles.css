@@ -188,11 +188,11 @@ body, html {
 }
 
 .rare {
-    border:  dashed 1px #d27105;
+    border: dashed 1px #d27105;
 }
 
 .legendary {
-    border:  solid 1px #d27105;
+    border: solid 1px #d27105;
 }
 
 .title {
@@ -212,4 +212,15 @@ body, html {
     bottom: 0;
     padding: 3rem;
     line-height: 2;
+}
+
+a {
+    display: block;
+    width: 100%;
+    text-align: center;
+    color: #d27105;
+}
+
+a:visited {
+    color: #d27105;
 }

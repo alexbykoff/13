@@ -22,6 +22,8 @@ Zipped game (with all the assets and deps) must not exceed **13k** bytes.
 Cursors to move.   
 If you decide to equip a new piece of gear an old one will be replaced and sold.
 
+First foe is the hardest so steel yourself.
+
 
 ##### How to develop:
 

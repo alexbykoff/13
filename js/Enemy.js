@@ -35,6 +35,6 @@ export default class Enemy {
     }
 
     static getHp(type) {
-        return Math.round(types[type].hp * (1 + game.player.level / 5)) + game.player.level * 12;
+        return Math.round(types[type].hp * (1 + game.player.level / 5)) + game.player.level * 14;
     }
 }

@@ -2,6 +2,7 @@ import {$, C} from "./helpers";
 import {game} from "./index";
 
 export default function Card(item) {
+    game.canMove = false;
     const card = C();
     card.className = "card";
     const name = item.name ? `<div class="t-name">${item.name}</div>` : "";
@@ -23,6 +24,7 @@ export default function Card(item) {
     equip.onclick = () => {
         game.player.gear[item.slot] = item;
         document.body.removeChild($(".card"));
+        game.canMove = true;
         return game.player.updateInfobar();
     };
 
@@ -31,6 +33,7 @@ export default function Card(item) {
     sell.onclick = () => {
         game.player.gold += item.price;
         document.body.removeChild($(".card"));
+        game.canMove = true;
         return game.player.updateInfobar();
     };
 

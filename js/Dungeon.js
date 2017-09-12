@@ -38,7 +38,7 @@ export default class Dungeon {
             for (let x = 0; x < 20; x++) {
                 for (let y = 0; y < 20; y++) {
                     if ([...$(`#c${x}-${y}`).classList].indexOf('free') >= 0) {
-                        $(`#c${x}-${y}`).className = ("cell player");
+                        $(`#c${x}-${y}`).className = "cell player";
                         this.player.x = x;
                         this.player.y = y;
                         break start;
@@ -50,7 +50,7 @@ export default class Dungeon {
             for (let x = 19; x >= 0; x--) {
                 for (let y = 19; y >= 0; y--) {
                     if ([...$(`#c${x}-${y}`).classList].indexOf('free') >= 0) {
-                        $(`#c${x}-${y}`).classList.add("finish");
+                        $(`#c${x}-${y}`).className = "fade cell finish";
                         this.exit.x = x;
                         this.exit.y = y;
                         break finish;
@@ -138,25 +138,24 @@ export default class Dungeon {
         const log = C();
         if (this.playerTurn) {
             this.playerTurn = false;
-            let damage = Math.floor(player.stats.damage * player.stats.str / 21);
-            damage = rndInt(damage - damage / 7, damage + damage / 7);
+            let damage = Math.floor(player.stats.damage * player.stats.str / 25) - this.player.level * 4;
+            damage = rndInt(damage - damage / 5, damage + damage / 5);
             const crit = player.stats.agi >= (player.stats.str + player.stats.damage / 3 ) ? 2 : 1;
             damage *= crit;
             enemy.hp -= damage;
-            const hit = crit === 2 ? "crit" : "hit";
+            const hit = crit === 2 ? "critically hit" : "hit";
             if (enemy.hp <= 0) {
-                log.innerHTML = `You finish <i>${enemy.name}</i> with ${damage}hp hit!`;
+                log.innerHTML = `You finish <i>${enemy.name}</i> with a massive blow of ${damage} damage!`;
                 $(".battle").appendChild(log);
                 play(fx.victory);
                 this.endBattle(onWin);
             } else {
                 play(fx.hit);
-                log.innerHTML = `You ${hit} <i>${enemy.name}</i>: -${damage}hp`;
+                log.innerHTML = `You ${hit} <i>${enemy.name}</i> for ${damage} damage`;
                 $(".battle").appendChild(log);
             }
         } else {
             this.turnCount++;
-            play(fx.hit);
             this.playerTurn = true;
             let damage = enemy.damage + this.turnCount * 2;
             let e = "";
@@ -167,12 +166,14 @@ export default class Dungeon {
             player.hp -= damage;
             if (player.hp < 0) player.hp = 0;
             $('#hp').innerHTML = `Health: ${player.hp}`;
-            log.innerHTML = `<i>${e + enemy.name}</i> hits you: -${damage}hp`;
+            log.innerHTML = `<i>${e + enemy.name}</i> hits you for ${damage} damage`;
             if (player.hp === 0) {
                 log.innerHTML += `\nYou died!`;
                 $(".battle").appendChild(log);
+                play(fx.death);
                 return this.endBattle();
             }
+            play(fx.hit);
             $(".battle").appendChild(log);
         }
     }

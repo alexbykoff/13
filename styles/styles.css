@@ -57,7 +57,6 @@ body, html {
     right: 0;
     bottom: 0;
     background: #d27105;
-    opacity: .98;
 }
 
 .item.fade {
@@ -92,7 +91,7 @@ body, html {
 }
 
 .finish {
-    background: firebrick none;
+    background: url("../images/downpass.png");
 }
 
 .item {

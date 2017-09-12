@@ -11,11 +11,11 @@ export default class Player {
         this.kills = 0;          // Enemy kill count
         this.level = 1;          // Floor
         this.stats = {
-            str: 30,
-            vit: 30,
-            agi: 30,
-            per: 30,
-            damage: 30
+            str: 35,
+            vit: 35,
+            agi: 35,
+            per: 35,
+            damage: 35
         };
         this.gear = {};         // player armor doll
         this.updateInfobar();
@@ -28,6 +28,7 @@ export default class Player {
             this.level++;
             game.initialize();
             this.cells = 120;
+            play(fx.down);
             game.buildNewRoom(this.cells);
             game.populateRoom();
         }
@@ -62,7 +63,7 @@ export default class Player {
 
     updateInfobar() {
         Object.keys(this.stats).forEach(stat => {
-            this.stats[stat] = 30;
+            this.stats[stat] = 35;
             this.gear && Object.keys(this.gear).forEach(item => {
                 this.stats[stat] += this.gear[item].stats[stat] || 0;
             })

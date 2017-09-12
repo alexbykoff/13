@@ -1,11 +1,10 @@
-import {rndInt, $, C} from "./helpers";
+import {rndInt} from "./helpers";
 import {game} from "./index";
 import {generateName} from "./name";
 import Card from "./Card";
 
 export default class Loot {
     constructor() {
-        this.id = Loot.ID(); // used for attr within inventory div
         this.price = 0;            // price you can sell an item for
         this.type = "";            // type of item: armor, weapon, ring
         this.slot = "";            // slot to place item into: head, chest, hand, leg
@@ -14,10 +13,6 @@ export default class Loot {
         this.stats = {};           // stats that are rolled if isItem
         this.rollItem();           // item generating method
         this.type !== "coins" && this.showCard();
-    }
-
-    static ID() {
-        return Math.random().toString(36).substr(2, 10);
     }
 
     rollItem() {

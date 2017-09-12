@@ -37,10 +37,6 @@ body, html {
     text-align: left;
 }
 
-.w-text {
-    font-size: 3rem;
-}
-
 .w-text.small {
     font-size: 1rem;
 }
@@ -108,10 +104,6 @@ body, html {
 
 .enemy[data-enemy-type="wrath"] {
     background: url("../images/wrath.png");
-}
-
-.battle {
-    color: #d27105;
 }
 
 .battle {

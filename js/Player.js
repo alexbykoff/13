@@ -57,7 +57,7 @@ export default class Player {
                 this.kills++;
                 this.updateInfobar();
             }, () => {
-              this.showGameover();
+                this.showGameover();
             });
         }
 
@@ -72,12 +72,12 @@ export default class Player {
         });
         this.gear && Object.keys(this.gear).forEach(item => {
             let data = "";
-            this.gear[item].name && (data+=`<div class="sidebar-itemname">${this.gear[item].name}</div>`);
+            this.gear[item].name && (data += `<div class="sidebar-itemname">${this.gear[item].name}</div>`);
             Object.keys(this.gear[item].stats).forEach(stat => {
                 data += `<div>${stat}: ${this.gear[item].stats[stat]}</div>`;
             });
             $(`#${item}`).innerHTML = data;
-            $(`#${item}`).className =this.gear[item].rarity
+            $(`#${item}`).className = this.gear[item].rarity
         });
         this.hp = this.stats.vit * 9;
         this.score = this.kills * this.level * this.gold;
@@ -94,7 +94,11 @@ export default class Player {
         console.log('showGameover');
         const g = C();
         g.classList.add('gameover');
-        g.innerHTML = `<h1>Game Over!</h1><h2>Score: ${this.score}</h2>`;
+        g.innerHTML =
+            `<h1>Game Over!</h1><h2>Score: ${this.score}</h2>
+<p>You defeated ${this.kills} foes and ventured down the dungeon level ${this.level}</p>
+<p>Sadly, you perished but your fame and courage will outlive the greatest of the kings.</p>
+`;
 
         const restart = C();
         restart.className = "card-button";

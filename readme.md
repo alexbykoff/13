@@ -1,4 +1,4 @@
-#\<Div>ine Descent
+# \<Div>ine Descent
 ### a 13kb endless RPG adventure  
 
 Created for [js13kGames](http://js13kgames.com/) competition.  

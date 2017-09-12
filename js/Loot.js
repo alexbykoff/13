@@ -13,8 +13,7 @@ export default class Loot {
         this.rarity = "";          // rarity: common, rare, legendary, artifact
         this.stats = {};           // stats that are rolled if isItem
         this.rollItem();           // item generating method
-        const msg = `You picked ${this.price} coins`;
-        this.type !== "coins" ? this.showCard() : this.toastLoot(msg);
+        this.type !== "coins" && this.showCard();
     }
 
     static ID() {
@@ -118,15 +117,6 @@ export default class Loot {
         Object.keys(this.stats).forEach(s => this.rarity === "rare"
             ? this.stats[s] = Math.floor(this.stats[s] * 1.5)
             : this.rarity === "legendary" ? this.stats[s] *= 2 : null);
-    };
-
-    toastLoot(msg) {
-        const toast = C();
-        toast.className = "lootToaster";
-        toast.innerHTML = msg;
-        $(".holder").appendChild(toast);
-        setTimeout(() => toast.classList.add("lootToaster-fade"), 500);
-        setTimeout(() => toast.parentNode.removeChild(toast), 3000);
     }
 
     showCard() {

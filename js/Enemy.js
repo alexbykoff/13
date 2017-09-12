@@ -21,20 +21,20 @@ const types = {
 
 export default class Enemy {
     constructor(type) {
-        this.name = this.getName(type);
-        this.damage = this.getDamage(type);
-        this.hp = this.getHp(type);
+        this.name = Enemy.getName(type);
+        this.damage = Enemy.getDamage(type);
+        this.hp = Enemy.getHp(type);
     }
 
-    getName(type) {
+    static getName(type) {
         return types[type].name;
     }
 
-    getDamage(type) {
-        return Math.round(types[type].damage * (1 + game.player.level / 6)) + game.player.level * 2;
+    static getDamage(type) {
+        return Math.round(types[type].damage * (1 + game.player.level / 6)) + game.player.level * 5;
     }
 
-    getHp(type) {
-        return Math.round(types[type].hp * (1 + game.player.level / 6)) + game.player.level * 2;
+    static getHp(type) {
+        return Math.round(types[type].hp * (1 + game.player.level / 5)) + game.player.level * 10;
     }
 }

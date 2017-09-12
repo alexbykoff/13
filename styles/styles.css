@@ -88,7 +88,7 @@ body, html {
 }
 
 .finish {
-    background: firebrick none;
+    background: url("../images/downpass.png");
 }
 
 .item {

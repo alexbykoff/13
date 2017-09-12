@@ -110,7 +110,30 @@ body, html {
     background: url("../images/wrath.png");
 }
 
-.card,
+.lootToaster {
+    opacity: 1;
+    padding: .5rem;
+    width: 22rem;
+    height: 3rem;
+    text-align: center;
+    color: #d27105;
+    background-color: #000;
+    border: 4px solid #d27105;
+    position: absolute;
+    bottom: -3rem;
+    left: calc(50% - 11rem);
+    line-height: 1;
+    transition: all 2.5s linear;
+}
+
+.lootToaster-fade {
+    opacity: 0;
+}
+
+.battle {
+    color: #d27105;
+}
+
 .battle {
     position: absolute;
     width: 340px;
@@ -121,6 +144,21 @@ body, html {
     border: 4px solid #d27105;
     color: #d27105;
     box-shadow: 6px 6px #000;
+}
+
+.card {
+    position: absolute;
+    width: 260px;
+    left: calc(50% - 130px);
+    top: 240px;
+    padding: 16px 8px;
+    background: #000;
+    border: 4px solid #d27105;
+    box-shadow: 6px 6px #000;
+}
+
+.card .t-stat {
+    text-align: center;
 }
 
 .t-name {
@@ -153,8 +191,14 @@ body, html {
     color: #d27105;
     text-align: center;
     border: 2px solid #d27105;
-    padding: 0.5rem;
-    margin: 1rem 1rem 0 1rem;
+    padding: .5rem;
+    margin: 1rem 1rem 0;
+    width: 208px;
+}
+
+.card-button:hover {
+    background-color: #d27105;
+    color: #000;
 }
 
 .stat-holder {

@@ -1,4 +1,4 @@
-import {$, updateNeighbours} from './helpers';
+import {$, C, updateNeighbours} from './helpers';
 import fx, {play} from "./sounds";
 import Loot from "./Loot";
 import Enemy from "./Enemy";
@@ -56,6 +56,8 @@ export default class Player {
                 n.classList = "cell item";
                 this.kills++;
                 this.updateInfobar();
+            }, () => {
+              this.showGameover();
             });
         }
 
@@ -85,5 +87,24 @@ export default class Player {
         $('#score').innerHTML = `Score: ${this.score}`;
 
         Object.keys(this.stats).forEach(s => $(`#${s}`).innerHTML = `${s}: ${this.stats[s]}`);
+    }
+
+    showGameover() {
+        game.canMove = false;
+        console.log('showGameover');
+        const g = C();
+        g.classList.add('gameover');
+        g.innerHTML = `<h1>Game Over!</h1><h2>Score: ${this.score}</h2>`;
+
+        const restart = C();
+        restart.className = "card-button";
+        restart.innerHTML = "Restart";
+        restart.onclick = () => {
+            window.location.reload(true);
+        };
+
+        g.appendChild(restart);
+
+        $('.holder').appendChild(g);
     }
 }

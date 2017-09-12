@@ -1,6 +1,8 @@
 # \<Div>ine Descent
 ### a 13kb endless RPG adventure  
 
+![](400-250.png)
+
 Created for [js13kGames](http://js13kgames.com/) competition.  
 
 Made out of divs only, no canvas involved. _11 kilobytes with all the dependencies._ 

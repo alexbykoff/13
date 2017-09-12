@@ -11,4 +11,17 @@ hunt for greater loot, earn gold and try to stay alive for as long as you can.
 This is the very early release, many things should and must be improved, feel free to open an issue or a pull request.
 Zipped game (with all the assets and deps) must not exceed **13k** bytes.
 
+##### How to play:
+
+- clone repo or download zip
+- unzip
+- run `index.html`
+
+##### How to develop:
+
+- fork
+- clone
+- `npm install`
+- `npm start`
+
  

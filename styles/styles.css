@@ -98,15 +98,15 @@ body, html {
     background: url("../images/t.png");
 }
 
-[data-enemy-type="skeleton"] {
+.enemy[data-enemy-type="skeleton"] {
     background: url("../images/skeleton.png");
 }
 
-[data-enemy-type="crab"] {
+.enemy[data-enemy-type="crab"] {
     background: url("../images/crab.png");
 }
 
-[data-enemy-type="wrath"] {
+.enemy[data-enemy-type="wrath"] {
     background: url("../images/wrath.png");
 }
 

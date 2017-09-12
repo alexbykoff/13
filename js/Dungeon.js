@@ -124,17 +124,17 @@ export default class Dungeon {
         }
     }
 
-    startBattle(enemy, player, onWin) {
+    startBattle(enemy, player, onWin, onLose) {
         this.canMove = false;
         const battle = C();
         this.playerTurn = true;
         battle.className = "battle";
         battle.innerHTML = `A foul <i>${enemy.name}</i> with ${enemy.hp}hp stands before you!`;
         document.body.appendChild(battle);
-        this.logger = setInterval(() => this.performTurn(enemy, player, onWin), 1250);
+        this.logger = setInterval(() => this.performTurn(enemy, player, onWin, onLose), 1250);
     }
 
-    performTurn(enemy, player, onWin) {
+    performTurn(enemy, player, onWin, onLose) {
         const log = C();
         if (this.playerTurn) {
             this.playerTurn = false;
@@ -171,22 +171,30 @@ export default class Dungeon {
                 log.innerHTML += `\nYou died!`;
                 $(".battle").appendChild(log);
                 play(fx.death);
-                return this.endBattle();
+                return this.endBattle(onWin, onLose);
             }
             play(fx.hit);
             $(".battle").appendChild(log);
         }
     }
 
-    endBattle(onWin) {
-        this.turnCount = 0;
-        this.player.hp = this.player.maxHp;
+    endBattle(onWin, onLose) {
         clearInterval(this.logger);
-        setTimeout(() => {
-            document.body.removeChild($('.battle'));
-            this.canMove = true;
-        }, 2000);
-        onWin && onWin();
+        if (onLose) {
+            setTimeout(() => {
+                document.body.removeChild($('.battle'));
+                this.canMove = false;
+                return onLose();
+            }, 2000);
+        } else {
+            this.turnCount = 0;
+            this.player.hp = this.player.maxHp;
+            setTimeout(() => {
+                document.body.removeChild($('.battle'));
+                this.canMove = true;
+            }, 2000);
+            return onWin();
+        }
     }
 
 }
